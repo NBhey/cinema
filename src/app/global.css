@@ -1,0 +1,15 @@
+:root {
+  --font-main: 'Roboto', sans-serif;
+
+  --fw-lighter: 100;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-hard: 900;
+
+  --fs-14: 14px;
+  --fs-15: 15px;
+  --fs-16: 16px;
+  --fs-34: 34px;
+}
