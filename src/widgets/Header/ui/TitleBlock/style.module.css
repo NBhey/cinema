@@ -1,0 +1,14 @@
+.title {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 14px;
+}
+
+.color {
+    color: pink;
+}
+
+.heading-light {
+  font-weight: 100;
+}
