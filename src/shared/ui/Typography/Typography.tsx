@@ -1,11 +1,22 @@
+import styles from './Typography.module.css'
+import { ElementType } from 'react'
+
 interface Typography {
-  tag: string
+  as?: ElementType
   variant: string
-  children: React.ReactElement
+  children: React.ReactNode
+  className?: string
 }
 
-export const Typography = ({ tag, variant, children }: Typography) => {
-  if (tag === 'p') {
-    return <p> {children}</p>
-  }
+export const Typography = ({
+  as: Component = 'div',
+  variant,
+  className = '',
+  children,
+}: Typography) => {
+  return (
+    <Component className={`${styles[variant]} ${className}`}>
+      {children}
+    </Component>
+  )
 }

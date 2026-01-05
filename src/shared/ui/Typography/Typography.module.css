@@ -1,0 +1,29 @@
+.heading-xl {
+  font-family: var(--font-main);
+  font-weight: var(--fw-hard);
+  font-size: var(--fs-34);
+  line-height: var(--lh-39);
+}
+
+.heading-light {
+  font-weight: var(--fw-lighter);
+}
+
+.heading-sm {
+  font-family: var(--font-main);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-16);
+  line-height: var(--lh-18);
+}
+.text-regular {
+  font-family: var(--font-main);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-15);
+  line-height: var(--lh-17);
+}
+.text-light {
+  font-family: var(--font-main);
+  font-weight: var(--fw-light);
+  font-size: var(--fs-14);
+  line-height: var(--lh-16);
+}
