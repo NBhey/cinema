@@ -1,3 +1,11 @@
 .card {
-    
+  padding: 10px 20px;
+  flex-grow: 1;
+
+  text-transform: capitalize;
+  background-color: #ffffffe6;
+  border-radius: 2px;
+  box-shadow:
+    0 2px 2px #0000003d,
+    0 0 2px #0000001f;
 }

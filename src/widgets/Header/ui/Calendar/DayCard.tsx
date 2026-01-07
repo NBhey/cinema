@@ -1,7 +1,14 @@
-import './dayCard.module.css'
+import styles from './DayCard.module.css'
 
-const DayCard = ({ day }: { day: number }) => {
-  return <li>
-    
-  </li>
+export const DayCard = ({
+  day,
+  currentDay = false,
+}: {
+  day: number
+  currentDay?: boolean
+}) => {
+  return <a className={styles.card}>
+    {currentDay && "Сегодня"}
+    {day}
+  </a>
 }
