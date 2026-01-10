@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { DayCard } from './DayCard'
 import style from './Calendar.module.css'
+import { Button } from '@/shared/ui/Button/Button'
 
 const arrayDaysOfWeek = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']
 
-function checkDate(date: Date) {
+function checkDate(date: Date): boolean {
   return (
     date.getFullYear() === new Date().getFullYear() &&
     date.getMonth() === new Date().getMonth() &&
@@ -45,8 +46,6 @@ export const Calendar = () => {
       today: checkDate(currentDate),
     })
   }
-
-  console.log(calendarList)
 
   const CardsList = calendarList.map((day) => {
     return (
@@ -96,9 +95,26 @@ export const Calendar = () => {
     )
   }
 
+  const prevCalendarList = () => {
+    setStartDate((prevDate) => {
+      return new Date(
+        prevDate.getFullYear(),
+        prevDate.getMonth(),
+        prevDate.getDate() - 6,
+      )
+    })
+  }
+
   return (
     <nav className={style.calendar}>
-      {!hasPrev && prvBtn()}
+      {/* {!hasPrev && prvBtn()} */}
+      {!hasPrev && (
+        <Button
+          text={'<'}
+          clickAction={prevCalendarList}
+          style={{ flexGrow: 1, backgroundColor: "#FFFFFFE5" }}
+        />
+      )}
       {CardsList}
       {nxtBtn()}
     </nav>
