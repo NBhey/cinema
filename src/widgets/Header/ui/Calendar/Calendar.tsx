@@ -3,7 +3,7 @@ import { DayCard } from './DayCard'
 import style from './Calendar.module.css'
 import { Button } from '@/shared/ui/Button/Button'
 
-const arrayDaysOfWeek = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']
+const arrayDaysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
 
 function checkDate(date: Date): boolean {
   return (
@@ -47,53 +47,18 @@ export const Calendar = () => {
     })
   }
 
+  console.log(calendarList)
+
   const CardsList = calendarList.map((day) => {
     return (
       <DayCard
         key={String(new Date(day.year, day.month, day.day))}
         currentDay={day.today}
         day={day.day}
+        dayOfWeek={day.dayOfWeek.dayOfWeekString}
       ></DayCard>
     )
   })
-
-  const nxtBtn = () => {
-    return (
-      <button
-        onClick={() => {
-          setStartDate((prevDate) => {
-            return new Date(
-              prevDate.getFullYear(),
-              prevDate.getMonth(),
-              prevDate.getDate() + 6,
-            )
-          })
-        }}
-        style={{ flexGrow: 1 }}
-      >
-        {'>'}
-      </button>
-    )
-  }
-
-  const prvBtn = () => {
-    return (
-      <button
-        onClick={() => {
-          setStartDate((prevDate) => {
-            return new Date(
-              prevDate.getFullYear(),
-              prevDate.getMonth(),
-              prevDate.getDate() - 6,
-            )
-          })
-        }}
-        style={{ flexGrow: 1 }}
-      >
-        {'<'}
-      </button>
-    )
-  }
 
   const prevCalendarList = () => {
     setStartDate((prevDate) => {
@@ -105,18 +70,35 @@ export const Calendar = () => {
     })
   }
 
+  const nextCalendarList = () => {
+    setStartDate((prevDate) => {
+      return new Date(
+        prevDate.getFullYear(),
+        prevDate.getMonth(),
+        prevDate.getDate() + 6,
+      )
+    })
+  }
+
   return (
     <nav className={style.calendar}>
-      {/* {!hasPrev && prvBtn()} */}
       {!hasPrev && (
         <Button
           text={'<'}
           clickAction={prevCalendarList}
-          style={{ flexGrow: 1, backgroundColor: "#FFFFFFE5" }}
+          style={{ flexGrow: 1 }}
+          variant="calendar"
         />
       )}
+
       {CardsList}
-      {nxtBtn()}
+
+      <Button
+        text={'>'}
+        clickAction={nextCalendarList}
+        style={{ flexGrow: 1 }}
+        variant="calendar"
+      />
     </nav>
   )
 }
