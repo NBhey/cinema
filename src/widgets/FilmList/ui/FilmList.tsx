@@ -4,6 +4,6 @@ import { useContext } from "react"
 export const FilmList: React.FC = () => {
   const context = useContext(AppContext)
 
-  console.log(context)
+  
   return <></>
 }

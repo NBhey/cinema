@@ -6,11 +6,12 @@ interface Button {
   clickAction?: () => void
   className?: string
   style?: CSSProperties 
+  variant: string
 }
 
-export const Button = ({ text, className='', style={}, clickAction }: Button) => {
+export const Button = ({ text, className='', style={}, clickAction, variant }: Button) => {
   return (
-    <button onClick={clickAction} className={`${styles.btn} ${className}`} style={style}>
+    <button onClick={clickAction} className={`${styles[variant]} ${className}`} style={style}>
       {text}
     </button>
   )

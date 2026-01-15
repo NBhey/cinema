@@ -1,0 +1,32 @@
+.enter {
+  background-color: #16a6af;
+  border: none;
+  text-align: center;
+  padding: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  box-shadow:
+    0 3px 3px #0000003d,
+    0 0 3px #0000001f;
+}
+
+.enter:hover { 
+  background-color: azure;
+  color: black;
+}
+
+.calendar {
+  border: none;
+  border-radius: 2px;
+  background-color: #ffffffe5;
+  box-shadow:
+    0 2px 2px #0000003d,
+    0 0 2px #0000001f;
+
+  cursor: pointer;
+}
+
+.calendar:hover {
+  background-color: azure;
+}
