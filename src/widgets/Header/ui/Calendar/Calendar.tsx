@@ -47,8 +47,6 @@ export const Calendar = () => {
     })
   }
 
-  console.log(calendarList)
-
   const CardsList = calendarList.map((day) => {
     return (
       <DayCard

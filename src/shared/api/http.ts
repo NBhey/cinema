@@ -5,6 +5,7 @@ const instance = axios.create({
   baseURL: API_CONFIG.baseURL,
 })
 
+
 type HallPlaces = 'standart' | 'vip' | 'taken' | 'disabled'
 
 interface Hall {
@@ -40,8 +41,10 @@ type AllData = {
 }
 // Общий: у пользователя и админа
 export const getAllData = async () => {
-  const { data } = await instance.get<AllData>('alldata')
-
+  const {data} = await instance.get<AllData>('alldata').then(res=>{
+    return res
+  })
+  console.log(data)
   return data
 }
 

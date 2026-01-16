@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   --font-main: 'Roboto', sans-serif;
 
@@ -8,7 +14,7 @@
   --fw-bold: 700;
   --fw-hard: 900;
 
-  --fs-13: 12px;
+  --fs-12: 12px;
   --fs-13: 13px;
   --fs-14: 14px;
   --fs-15: 15px;

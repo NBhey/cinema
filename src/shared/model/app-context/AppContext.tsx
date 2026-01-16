@@ -11,15 +11,24 @@ import { initialState, stateReducer } from './reducer'
 export const AppContext = createContext({})
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  useEffect(() => {}, [])
+ 
 
   const [currentDate, setCurrentDate] = useState(new Date())
   const [state, dispatch] = useReducer(stateReducer, initialState)
 
+
+ useEffect(() => {
+  async function fetchData(){
+    return  getAllData()
+  }
+  const getData = fetchData()
+  console.log(getData) 
   dispatch({
     type: 'UPDATE_ALL_STATE',
-    payload: getAllData(),
+    payload: {},
   })
+
+}, [])
 
   return (
     <AppContext.Provider value={{ dispatch, state, currentDate }}>

@@ -1,4 +1,4 @@
-import styles from './style.module.css'
+import styles from './Button.module.css'
 import { CSSProperties } from "react";
 
 interface Button {
@@ -6,10 +6,10 @@ interface Button {
   clickAction?: () => void
   className?: string
   style?: CSSProperties 
-  variant: string
+  variant: "calendar" | "enter"
 }
 
-export const Button = ({ text, className='', style={}, clickAction, variant }: Button) => {
+export const Button = ({ text, variant, className='', style={}, clickAction }: Button) => {
   return (
     <button onClick={clickAction} className={`${styles[variant]} ${className}`} style={style}>
       {text}

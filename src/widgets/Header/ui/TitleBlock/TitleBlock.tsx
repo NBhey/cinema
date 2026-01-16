@@ -13,7 +13,7 @@ export const TitleBlock = () => {
         Кино
       </Typography>
 
-      <Button variant='enter' text="войти" />
+      <Button text="войти" variant='enter'/>
     </div>
   )
 }

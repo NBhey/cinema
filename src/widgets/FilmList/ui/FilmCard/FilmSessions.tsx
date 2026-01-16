@@ -1,3 +1,3 @@
-export const FilmSessions = () => {
-    
+const FilmSessions = () => {
+    return <></>
 }

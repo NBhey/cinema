@@ -1,3 +1,3 @@
-export const FilmDescription = () => {
-    
+const FilmDescription = () => {
+    return <></>
 }

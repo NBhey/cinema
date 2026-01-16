@@ -1,7 +1,14 @@
-import "./App.css";
+import "./app/global.css";
+import { HashRouter as Router, Routes,Route } from 'react-router-dom';
+import { MainPage } from "./pages/MainPage/MainPage";
 
 function App() {
-  return <div className="App"></div>;
+  return <Router>
+    <Routes>
+      <Route path="/"  element={<MainPage />}/>
+    </Routes>
+  </Router>
+  
 }
 
 export default App;
