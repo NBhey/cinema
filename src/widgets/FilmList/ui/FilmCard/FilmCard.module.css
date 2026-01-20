@@ -1,0 +1,7 @@
+.card {
+    padding: 15px;
+    max-width: 990px;
+
+    display: flex;
+    flex-direction: column;
+}
