@@ -1,6 +1,4 @@
-
 type HallPlaces = 'standart' | 'vip' | 'taken' | 'disabled'
-
 
 export interface Hall {
   id: number
@@ -19,6 +17,7 @@ export interface Films {
   film_duration: number
   film_origin: string
   film_poster: string
+  film_description: string
 }
 
 export interface Seances {
@@ -29,10 +28,7 @@ export interface Seances {
 }
 
 export type AllDataFilm = {
-  success: boolean
-  result: {
-    halls: Hall
-    films: Films
-    seances: Seances
-  }
+  halls: Hall
+  films: Films[]
+  seances: Seances[]
 }

@@ -1,8 +1,16 @@
-export const initialState = {}
+import { AllDataFilm } from '@/shared/api/type'
+
+export type State = {
+  isLoading: boolean
+  result: AllDataFilm | null
+   success?: boolean
+}
+
+export const initialState: State = {isLoading: false, result: null }
 
 export const stateReducer = (
-  state: {},
-  action: { type: string; payload: {}},
+  state: State,
+  action: { type: string; payload: {} },
 ) => {
   switch (action.type) {
     case 'UPDATE_ALL_STATE':
@@ -10,7 +18,8 @@ export const stateReducer = (
         ...state,
         ...action.payload,
       }
-      default:
+    default:
       return state
   }
 }
+
