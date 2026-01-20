@@ -7,7 +7,6 @@ interface FilmDescription {
   poster: string
   duration: number
 }
-
 export const FilmDescription = ({
   poster,
   name,
