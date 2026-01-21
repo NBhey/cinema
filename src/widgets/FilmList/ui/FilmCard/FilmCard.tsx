@@ -1,6 +1,7 @@
 import { Seances, Films } from '@/shared/api/type'
 import styles from './FilmCard.module.css'
 import { FilmDescription } from './FilmDescription/FilmDescription'
+import { FilmSessions } from './FilmSessions/FilmSessions'
 
 type FilmCard = Films & { seances: Array<Seances> }
 
@@ -22,6 +23,7 @@ export const FilmCard: React.FC<FilmCard> = ({
         duration={duration}
         country={country}
       />
+      <FilmSessions seances={seances} />
     </section>
   )
 }
