@@ -1,5 +1,5 @@
 import { useData } from '@/shared/model/app-context/AppContext'
-
+import styles from './FilmList.module.css'
 import { FilmCard } from './FilmCard/FilmCard'
 import { Loader } from '@/shared/ui/Loader/Loader'
 
@@ -34,5 +34,5 @@ export const FilmList: React.FC = () => {
     }
   })
 
-  return <main style={{paddingTop:'40px'}}>{list}</main>
+  return <main className={styles["film-list"]}>{list}</main>
 }
