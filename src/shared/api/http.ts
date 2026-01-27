@@ -1,13 +1,15 @@
 import { API_CONFIG } from './config'
-import axios from 'axios'
+import axios, { AxiosInstance } from 'axios'
 import { AllDataFilm, Hall, Seances } from './type'
 
-const instance = axios.create({
+const instance:AxiosInstance = axios.create({
   baseURL: API_CONFIG.baseURL,
 })
 
-
-
+instance.interceptors.response.use((response) => {
+  console.log('interceptors', response)
+  return response
+})
 
 // Общий: у пользователя и админа
 export const getAllData = async () => {
