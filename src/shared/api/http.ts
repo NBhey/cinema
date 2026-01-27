@@ -1,27 +1,26 @@
 import { API_CONFIG } from './config'
 import axios, { AxiosInstance } from 'axios'
 import { AllDataFilm, Hall, Seances } from './type'
+import camelcaseKeys from 'camelcase-keys'
 
-const instance:AxiosInstance = axios.create({
+const instance: AxiosInstance = axios.create({
   baseURL: API_CONFIG.baseURL,
 })
 
 instance.interceptors.response.use((response) => {
-  console.log('interceptors', response)
-  return response
+  const data = camelcaseKeys(response.data, { deep: true })
+
+  return data
 })
 
 // Общий: у пользователя и админа
 export const getAllData = async () => {
-  const { data } = await instance.get<AllDataFilm>('alldata').then((res) => {
-    return res
-  })
-  return data
+  return await instance.get<AllDataFilm>('alldata')
 }
 
 // Для пользователя
 export const getScheme = async (seanceId: Seances['id'], date: string) => {
-  const { data } = await instance.get<Hall['hall_config']>(
+  const { data } = await instance.get<Hall['hallConfig']>(
     `hallconfig?seanceId=${seanceId}&date=${date}`,
   )
 

@@ -2,29 +2,29 @@ type HallPlaces = 'standart' | 'vip' | 'taken' | 'disabled'
 
 export interface Hall {
   id: number
-  hall_name: string
-  hall_rows: number
-  hall_places: number
-  hall_config: Array<HallPlaces[]>
-  hall_price_standart: number
-  hall_price_vip: number
-  hall_open: number
+  hallName: string
+  hallRows: number
+  hallPlaces: number
+  hallConfig: Array<HallPlaces[]>
+  hallPriceStandart: number
+  hallPriceVip: number
+  hallOpen: number
 }
 
 export interface Films {
   id: number
-  film_name: string
-  film_duration: number
-  film_origin: string
-  film_poster: string
-  film_description: string
+  filmName: string
+  filmDuration: number
+  filmOrigin: string
+  filmPoster: string
+  filmDescription: string
 }
 
 export interface Seances {
   id: number
-  seance_filmid: number
-  seance_hallid: number
-  seance_time: string
+  seanceFilmid: number
+  seanceHallid: number
+  seanceTime: string
 }
 
 export type AllDataFilm = {
