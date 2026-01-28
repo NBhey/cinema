@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext","ES2023.Array", "DOM", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

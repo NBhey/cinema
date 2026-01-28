@@ -6,11 +6,11 @@ import { FilmSessions } from './FilmSessions/FilmSessions'
 type FilmCard = Films & { seances: Array<Seances> }
 
 export const FilmCard: React.FC<FilmCard> = ({
-  film_description: description,
-  film_duration: duration,
-  film_name: name,
-  film_origin: country,
-  film_poster: poster,
+  filmDescription: description,
+  filmDuration: duration,
+  filmName: name,
+  filmOrigin: country,
+  filmPoster: poster,
   id,
   seances,
 }) => {

@@ -6,8 +6,6 @@ import { Loader } from '@/shared/ui/Loader/Loader'
 export const FilmList: React.FC = () => {
   const { state } = useData()
 
-  console.log(state)
-
   if (!state.isLoading) {
     return (
       <div
@@ -26,7 +24,7 @@ export const FilmList: React.FC = () => {
   const list = state.result?.films.map((film) => {
     if (state.result) {
       const seances = state.result.seances.filter((seance) => {
-        return film.id === seance.seance_filmid
+        return film.id === seance.seanceFilmid
       })
 
       const sharedProps = { ...film, seances: seances }
@@ -34,5 +32,5 @@ export const FilmList: React.FC = () => {
     }
   })
 
-  return <main className={styles["film-list"]}>{list}</main>
+  return <main className={styles['film-list']}>{list}</main>
 }

@@ -7,30 +7,33 @@ type seanceIdField = Record<
   string,
   {
     hallid: number
-    seance_id: number[]
-    seance_filmid: number
-    seance_time: string[]
+    seanceId: number[]
+    seanceFilmId: number
+    seanceTime: string[]
   }
 >
 
 export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
   const seanceIdField: seanceIdField = {}
 
-  seances.forEach((seance) => {
-    if (seanceIdField[seance.seance_hallid]) {
-      seanceIdField[seance.seance_hallid].seance_id.push(seance.id)
-      seanceIdField[seance.seance_hallid].seance_time.push(seance.seance_time)
+  const sortedSeanceTime = seances.toSorted((a, b) => {
+    return Number(a.seanceTime.slice(0, 2)) - Number(b.seanceTime.slice(0, 2))
+  })
+ 
+
+  sortedSeanceTime.forEach((seance) => {
+    if (seanceIdField[seance.seanceHallid]) {
+      seanceIdField[seance.seanceHallid].seanceId.push(seance.id)
+      seanceIdField[seance.seanceHallid].seanceTime.push(seance.seanceTime)
     } else {
-      seanceIdField[seance.seance_hallid] = {
-        hallid: seance.seance_hallid,
-        seance_id: [seance.id],
-        seance_filmid: seance.seance_filmid,
-        seance_time: [seance.seance_time],
+      seanceIdField[seance.seanceHallid] = {
+        hallid: seance.seanceHallid,
+        seanceId: [seance.id],
+        seanceFilmId: seance.seanceHallid,
+        seanceTime: [seance.seanceTime],
       }
     }
   })
-
-  console.log(seanceIdField)
 
   return (
     <div>
@@ -42,10 +45,10 @@ export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
             </Typography>
 
             <div className={styles.time_row}>
-              {seanceIdField[seance].seance_time.map((time, position) => {
+              {seanceIdField[seance].seanceTime.map((time, position) => {
                 if (Number(time.slice(0, 2)) < new Date().getHours()) {
                   return (
-                    <span key={time} className={styles.time_disabled}>
+                    <span key={time} className={styles.timeDisabled}>
                       {time}
                     </span>
                   )
@@ -53,7 +56,7 @@ export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
                 return (
                   <NavLink
                     key={time}
-                    to={`/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seance_id[position]}`}
+                    to={`/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}`}
                     className={styles.time}
                   >
                     {time}

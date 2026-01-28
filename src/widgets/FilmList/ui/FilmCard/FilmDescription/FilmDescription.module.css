@@ -3,6 +3,8 @@
 }
 .poster {
   max-width: 125px;
+  min-height: 175px;
+  max-height: 175px;
 }
 
 .info {
@@ -11,7 +13,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 0 104.4px 15px;
+  padding: 0 0 0 15px;
   gap: 14px;
 }
 
