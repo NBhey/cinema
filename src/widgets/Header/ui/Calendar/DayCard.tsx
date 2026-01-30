@@ -1,27 +1,28 @@
+import { Link } from 'react-router'
 import styles from './DayCard.module.css'
 
 export const DayCard = ({
   day,
-  currentDay = false,
+  isCurrentDay = false,
   dayOfWeek,
 }: {
   day: number
-  currentDay?: boolean
+  isCurrentDay?: boolean
   dayOfWeek: string
 }) => {
   return (
-    <a
+    <Link
       className={`${styles.card}`}
       style={{
-        display: currentDay ? 'flex' : 'block',
+        display: isCurrentDay ? 'flex' : 'block',
         flexDirection: 'column',
       }}
     >
-      {currentDay && <span>{'Сегодня'}</span>}
-      <div style={{ display: 'flex', flexDirection: currentDay ? 'row' : 'column' }}>
+      {isCurrentDay && <span>{'Сегодня'}</span>}
+      <div style={{ display: 'flex', flexDirection: isCurrentDay ? 'row' : 'column' }}>
         <span>{dayOfWeek}, </span>
         <span>{day}</span>
       </div>
-    </a>
+    </Link>
   )
 }

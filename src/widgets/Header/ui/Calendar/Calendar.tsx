@@ -17,6 +17,7 @@ export const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date())
 
   const calendarList: Array<{
+    currentDate: Date
     day: number
     dayOfWeek: { dayOfWeek: number; dayOfWeekString: string }
     month: number
@@ -36,6 +37,7 @@ export const Calendar = () => {
     )
 
     calendarList.push({
+      currentDate,
       day: currentDate.getDate(),
       dayOfWeek: {
         dayOfWeek: currentDate.getDay(),
@@ -46,12 +48,12 @@ export const Calendar = () => {
       today: checkDate(currentDate),
     })
   }
-
+  console.log(typeof calendarList[0].currentDate)
   const CardsList = calendarList.map((day) => {
     return (
       <DayCard
         key={String(new Date(day.year, day.month, day.day))}
-        currentDay={day.today}
+        isCurrentDay={day.today}
         day={day.day}
         dayOfWeek={day.dayOfWeek.dayOfWeekString}
       ></DayCard>
