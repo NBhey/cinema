@@ -6,6 +6,7 @@ interface Typography {
   variant: string
   children: React.ReactNode
   className?: string
+  style?: Record<string, string | number>
 }
 
 export const Typography = ({
@@ -13,9 +14,13 @@ export const Typography = ({
   variant,
   className = '',
   children,
+  style,
 }: Typography) => {
   return (
-    <Component className={`${styles[variant]} ${className}`}>
+    <Component
+      style={{ ...style }}
+      className={`${styles[variant]} ${className}`}
+    >
       {children}
     </Component>
   )
