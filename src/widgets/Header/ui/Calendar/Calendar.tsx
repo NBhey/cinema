@@ -48,10 +48,11 @@ export const Calendar = () => {
       today: checkDate(currentDate),
     })
   }
-  console.log(typeof calendarList[0].currentDate)
+
   const CardsList = calendarList.map((day) => {
     return (
       <DayCard
+        currentDate={day.currentDate}
         key={String(new Date(day.year, day.month, day.day))}
         isCurrentDay={day.today}
         day={day.day}

@@ -5,7 +5,7 @@
 }
 
 :root {
-  --font-main: 'Roboto', sans-serif;
+  --font-main: 'Roboto';
 
   --fw-lighter: 100;
   --fw-light: 300;
@@ -21,7 +21,7 @@
   --fs-16: 16px;
   --fs-34: 34px;
 
-  --lh-14: 14px;
+  --lh-14: 1.4;
   --lh-16: 16px;
   --lh-17: 17px;
   --lh-18: 18px;
