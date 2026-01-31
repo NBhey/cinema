@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { DayCard } from './DayCard'
 import style from './Calendar.module.css'
 import { Button } from '@/shared/ui/Button/Button'
+import { NavLink, useParams } from 'react-router'
 
 const arrayDaysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
 
@@ -15,6 +16,8 @@ function checkDate(date: Date): boolean {
 
 export const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date())
+  // TODO прокинуть в DayCard чтобы проверять время сеанса на случай его пользователь кликнул на след дату
+  const params = useParams()
 
   const calendarList: Array<{
     currentDate: Date

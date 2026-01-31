@@ -15,3 +15,7 @@
   max-width: 241px;
   height: 52px;
 }
+
+.card.active .dayText {
+  font-weight: var(--fw-medium);
+}

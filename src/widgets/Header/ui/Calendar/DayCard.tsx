@@ -1,6 +1,7 @@
-import { NavLink } from 'react-router'
+import { NavLink, useParams } from 'react-router'
 import styles from './DayCard.module.css'
 import { Typography } from '@/shared/ui/Typography/Typography'
+
 
 export const DayCard = ({
   day,
@@ -27,17 +28,63 @@ export const DayCard = ({
       }
       to={`${isCurrentDay ? '/' : formatDate}`}
     >
-      {isCurrentDay && <Typography as='span' variant='text-light'>{'Сегодня'}</Typography>}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: isCurrentDay ? 'row' : 'column',
-        }}
-      >
-        <Typography as='span' variant='text-light'>{dayOfWeek}, {'\u00A0'}</Typography>
-    
-        <Typography as='span' variant='text-light'>{day}</Typography>
-      </div>
+      {({ isActive }) => (
+        <>
+          {isCurrentDay && (
+            <Typography
+              as="span"
+              variant="text-light"
+              style={{
+                ...(isActive
+                  ? { fontWeight: 700, fontSize: '15px', lineheight: '14px' }
+                  : {}),
+
+                color:
+                  dayOfWeek === 'Сб' || dayOfWeek === 'Вс'
+                    ? '#FF0000'
+                    : '#000000',
+              }}
+            >
+              {'Сегодня'}
+            </Typography>
+          )}
+
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: isCurrentDay ? 'row' : 'column',
+              color:
+                dayOfWeek === 'Сб' || dayOfWeek === 'Вс'
+                  ? '#FF0000'
+                  : '#000000',
+            }}
+          >
+            <Typography
+              as="span"
+              variant="text-light"
+              style={
+                isActive
+                  ? { fontWeight: 700, fontSize: '15px', lineheight: '14px' }
+                  : {}
+              }
+            >
+              {dayOfWeek}, {'\u00A0'}
+            </Typography>
+
+            <Typography
+              as="span"
+              variant="text-light"
+              style={
+                isActive
+                  ? { fontWeight: 700, fontSize: '15px', lineheight: '14px' }
+                  : {}
+              }
+            >
+              {day}
+            </Typography>
+          </div>
+        </>
+      )}
     </NavLink>
   )
 }
