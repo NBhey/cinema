@@ -1,5 +1,5 @@
 import { Typography } from '@/shared/ui/Typography/Typography'
-import styles from './style.module.css'
+import styles from './BrandTitle.module.css'
 
 export const BrandTitle = () => {
   return (
