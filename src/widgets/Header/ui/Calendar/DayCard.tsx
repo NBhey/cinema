@@ -1,7 +1,6 @@
-import { NavLink, useParams } from 'react-router'
+import { NavLink } from 'react-router'
 import styles from './DayCard.module.css'
 import { Typography } from '@/shared/ui/Typography/Typography'
-
 
 export const DayCard = ({
   day,
@@ -12,21 +11,14 @@ export const DayCard = ({
   day: number
   isCurrentDay?: boolean
   dayOfWeek: string
-  currentDate: Date
+  currentDate: string
 }) => {
-  //TODO это глупый компонент, он не должен делать какую-либо логику,только отрисовать то, что ему сказано
-  const formatDate = new Intl.DateTimeFormat('ru-RU', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).format(currentDate)
-
   return (
     <NavLink
       className={({ isActive }) =>
         `${styles.card} ${isActive ? styles.active : ''}`
       }
-      to={`${isCurrentDay ? '/' : formatDate}`}
+      to={`${isCurrentDay ? '/' : currentDate}`}
     >
       {({ isActive }) => (
         <>

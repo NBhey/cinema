@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DayCard } from './DayCard'
 import style from './Calendar.module.css'
 import { Button } from '@/shared/ui/Button/Button'
-import { NavLink, useParams } from 'react-router'
+import { useParams } from 'react-router'
 
 const arrayDaysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
 
@@ -20,7 +20,7 @@ export const Calendar = () => {
   const params = useParams()
 
   const calendarList: Array<{
-    currentDate: Date
+    currentDate: string
     day: number
     dayOfWeek: { dayOfWeek: number; dayOfWeekString: string }
     month: number
@@ -38,9 +38,9 @@ export const Calendar = () => {
       startDate.getMonth(),
       i,
     )
-
+    
     calendarList.push({
-      currentDate,
+      currentDate: currentDate.toLocaleDateString("en-CA"),
       day: currentDate.getDate(),
       dayOfWeek: {
         dayOfWeek: currentDate.getDay(),
