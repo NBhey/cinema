@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router'
+import { NavLink } from 'react-router-dom'
 import styles from './DayCard.module.css'
 import { Typography } from '@/shared/ui/Typography/Typography'
 
@@ -18,7 +18,7 @@ export const DayCard = ({
       className={({ isActive }) =>
         `${styles.card} ${isActive ? styles.active : ''}`
       }
-      to={`${isCurrentDay ? '/' : currentDate}`}
+      to={isCurrentDay ? '/' : `/${currentDate}`}
     >
       {({ isActive }) => (
         <>

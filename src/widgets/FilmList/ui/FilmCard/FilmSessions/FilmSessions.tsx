@@ -1,7 +1,7 @@
 import { Seances } from '@/shared/api/type'
 import styles from './FilmSessions.module.css'
 import { Typography } from '@/shared/ui/Typography/Typography'
-import { NavLink } from 'react-router'
+import { NavLink, useParams } from 'react-router-dom'
 
 type seanceIdField = Record<
   string,
@@ -15,11 +15,15 @@ type seanceIdField = Record<
 
 export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
   const seanceIdField: seanceIdField = {}
+  const { date } = useParams()
+
+  const today = new Date().toLocaleDateString('en-CA')
+  const selectedDate = date ?? today
+  const isToday = selectedDate === today
 
   const sortedSeanceTime = seances.toSorted((a, b) => {
     return Number(a.seanceTime.slice(0, 2)) - Number(b.seanceTime.slice(0, 2))
   })
- 
 
   sortedSeanceTime.forEach((seance) => {
     if (seanceIdField[seance.seanceHallid]) {
@@ -46,17 +50,27 @@ export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
 
             <div className={styles.time_row}>
               {seanceIdField[seance].seanceTime.map((time, position) => {
-                if (Number(time.slice(0, 2)) < new Date().getHours()) {
+                const [hh, mm] = time.split(':').map(Number)
+                const now = new Date()
+                const isPast =
+                  hh < now.getHours() ||
+                  (hh === now.getHours() && mm < now.getMinutes())
+
+                if (isToday && isPast) {
                   return (
-                    <span key={time} className={styles.timeDisabled}>
+                    <span key={`${seance}-${time}-${position}`} className={styles.timeDisabled}>
                       {time}
                     </span>
                   )
                 }
                 return (
                   <NavLink
-                    key={time}
-                    to={`/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}`}
+                    key={`${seance}-${time}-${position}`}
+                    to={
+                      selectedDate === today
+                        ? `/${today}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}`
+                        : `/${selectedDate}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}`
+                    }
                     className={styles.time}
                   >
                     {time}

@@ -16,8 +16,6 @@ function checkDate(date: Date): boolean {
 
 export const Calendar = () => {
   const [startDate, setStartDate] = useState(new Date())
-  // TODO прокинуть в DayCard чтобы проверять время сеанса на случай его пользователь кликнул на след дату
-  const params = useParams()
 
   const calendarList: Array<{
     currentDate: string
@@ -30,7 +28,7 @@ export const Calendar = () => {
 
   const hasPrev = checkDate(startDate)
 
-  let count = hasPrev ? 5 : 4
+  const count = hasPrev ? 5 : 4
 
   for (let i = startDate.getDate(); i <= startDate.getDate() + count; i += 1) {
     const currentDate = new Date(
