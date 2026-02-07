@@ -32,3 +32,8 @@ export type AllDataFilm = {
   films: Films[]
   seances: Seances[]
 }
+
+export type Scheme = {
+  result:Array<HallPlaces[]>
+  success: boolean
+}

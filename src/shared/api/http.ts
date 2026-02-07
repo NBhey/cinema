@@ -1,6 +1,6 @@
 import { API_CONFIG } from './config'
 import axios, { AxiosInstance } from 'axios'
-import { AllDataFilm, Hall, Seances } from './type'
+import { AllDataFilm, Hall, Scheme, Seances } from './type'
 import camelcaseKeys from 'camelcase-keys'
 
 const instance: AxiosInstance = axios.create({
@@ -8,23 +8,27 @@ const instance: AxiosInstance = axios.create({
 })
 
 instance.interceptors.response.use((response) => {
+  console.log(response)
   const data = camelcaseKeys(response.data, { deep: true })
-
+  console.log(data)
   return data
 })
 
-// Общий: у пользователя и админа
-export const getAllData = async () => {
-  return await instance.get<AllDataFilm>('alldata')
+export const api = {
+  get: <T>(url: string, config?: any) => instance.get<any, T>(url, config),
+  post: <T>(url: string, body?: any, config?: any) =>
+    instance.post<any, T>(url, body, config),
 }
 
-// Для пользователя
-export const getScheme = async (seanceId: Seances['id'], date: string) => {
-  const { data } = await instance.get<Hall['hallConfig']>(
-    `hallconfig?seanceId=${seanceId}&date=${date}`,
-  )
+export const getAllData = async () => {
+  return await api.get<AllDataFilm>('alldata')
+}
 
-  return data
+export const getScheme = async (
+  seanceId: Seances['id'],
+  date: string,
+): Promise<Scheme> => {
+  return await api.get<Scheme>(`hallconfig?seanceId=${seanceId}&date=${date}`)
 }
 
 export const buyTicket = (parameters: {
