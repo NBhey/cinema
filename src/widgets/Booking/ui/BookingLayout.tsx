@@ -5,7 +5,7 @@ import { BrandTitle } from '@/shared/ui'
 export const BookingLayout = () => {
   return (
     <div className={styles.bookingWrapper}>
-      <header>
+      <header className={styles.bookingHeader}>
         <Link to="/">
           <BrandTitle />
         </Link>
