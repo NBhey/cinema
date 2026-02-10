@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  align-self: flex-start;
+  padding: 15px;
+}

@@ -68,8 +68,8 @@ export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
                     key={`${seance}-${time}-${position}`}
                     to={
                       selectedDate === today
-                        ? `/${today}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}`
-                        : `/${selectedDate}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}`
+                        ? `/${today}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}-${numberHall + 1}`
+                        : `/${selectedDate}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}-${numberHall + 1}`
                     }
                     className={styles.time}
                   >

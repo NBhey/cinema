@@ -10,9 +10,8 @@ export const BookingLayout = () => {
           <BrandTitle />
         </Link>
       </header>
-      <section>
-        <Outlet />
-      </section>
+
+      <Outlet />
     </div>
   )
 }
