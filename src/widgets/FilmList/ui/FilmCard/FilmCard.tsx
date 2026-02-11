@@ -1,9 +1,9 @@
-import { Seances, Films } from '@/shared/api/type'
+import { Seances, Films, Hall } from '@/shared/api/type'
 import styles from './FilmCard.module.css'
 import { FilmDescription } from './FilmDescription/FilmDescription'
 import { FilmSessions } from './FilmSessions/FilmSessions'
 
-type FilmCard = Films & { seances: Array<Seances> }
+type FilmCard = Films & { seances: Array<Seances> } & { halls: Array<Hall> }
 
 export const FilmCard: React.FC<FilmCard> = ({
   filmDescription: description,
@@ -13,6 +13,7 @@ export const FilmCard: React.FC<FilmCard> = ({
   filmPoster: poster,
   id,
   seances,
+  halls
 }) => {
   return (
     <section className={styles.card}>
@@ -23,7 +24,7 @@ export const FilmCard: React.FC<FilmCard> = ({
         duration={duration}
         country={country}
       />
-      <FilmSessions seances={seances} />
+      <FilmSessions seances={seances} halls={halls}/>
     </section>
   )
 }

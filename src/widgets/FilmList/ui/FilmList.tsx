@@ -26,8 +26,11 @@ export const FilmList: React.FC = () => {
       const seances = state.result.seances.filter((seance) => {
         return film.id === seance.seanceFilmid
       })
-
-      const sharedProps = { ...film, seances: seances }
+      const halls = state.result.halls.filter((hall) => {
+        return seances.some((seance) => hall.id === seance.seanceHallid)
+      })
+       
+      const sharedProps = { ...film, seances, halls }
       return <FilmCard key={film.id} {...sharedProps} />
     }
   })

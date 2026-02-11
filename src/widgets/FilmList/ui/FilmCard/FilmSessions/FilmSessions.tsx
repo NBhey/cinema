@@ -1,4 +1,4 @@
-import { Seances } from '@/shared/api/type'
+import { Hall, Seances } from '@/shared/api/type'
 import styles from './FilmSessions.module.css'
 import { Typography } from '@/shared/ui/Typography/Typography'
 import { NavLink, useParams } from 'react-router-dom'
@@ -10,13 +10,21 @@ type seanceIdField = Record<
     seanceId: number[]
     seanceFilmId: number
     seanceTime: string[]
+    hallName?:string
   }
 >
 
-export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
+export const FilmSessions = ({
+  seances,
+  halls,
+}: {
+  seances: Array<Seances>
+  halls: Array<Hall>
+}) => {
   const seanceIdField: seanceIdField = {}
   const { date } = useParams()
 
+ 
   const today = new Date().toLocaleDateString('en-CA')
   const selectedDate = date ?? today
   const isToday = selectedDate === today
@@ -38,14 +46,22 @@ export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
       }
     }
   })
+ 
+  for (const seance in seanceIdField) {
+    const hall = halls.find((hall) => hall.id === seanceIdField[seance].hallid)
+    if (hall) {
+      seanceIdField[seance].hallName = hall.hallName
+    }
+  }
 
+  console.log('seanceIdField', seanceIdField)
   return (
     <div>
       {Object.keys(seanceIdField).map((seance, numberHall) => {
         return (
-          <div key={numberHall}>
+          <div key={seanceIdField[seance].hallName}>
             <Typography as="p" variant="heading-sm" className={styles.hall}>
-              {`Зал ${numberHall + 1}`}
+              {seanceIdField[seance].hallName}
             </Typography>
 
             <div className={styles.time_row}>
@@ -58,7 +74,10 @@ export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
 
                 if (isToday && isPast) {
                   return (
-                    <span key={`${seance}-${time}-${position}`} className={styles.timeDisabled}>
+                    <span
+                      key={`${seance}-${time}-${position}`}
+                      className={styles.timeDisabled}
+                    >
                       {time}
                     </span>
                   )
@@ -68,8 +87,8 @@ export const FilmSessions = ({ seances }: { seances: Array<Seances> }) => {
                     key={`${seance}-${time}-${position}`}
                     to={
                       selectedDate === today
-                        ? `/${today}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}-${numberHall + 1}`
-                        : `/${selectedDate}/halls/${seanceIdField[seance].hallid}/seances/${seanceIdField[seance].seanceId[position]}-${numberHall + 1}`
+                        ? `/${today}/halls/${seanceIdField[seance].hallName}/seances/${seanceIdField[seance].seanceId[position]}`
+                        : `/${selectedDate}/halls/${seanceIdField[seance].hallName}/seances/${seanceIdField[seance].seanceId[position]}`
                     }
                     className={styles.time}
                   >
