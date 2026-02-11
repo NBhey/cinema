@@ -9,14 +9,10 @@ import styles from './SelectSeatsStep.module.css'
 import { Typography } from '@/shared/ui/Typography/Typography'
 
 export const SelectSeatsStep = () => {
-  const { date, seanceId } = useParams()
+  const { date, hallName, seanceId } = useParams()
   const [sheme, setScheme] = useState<Scheme['result']>([])
-  console.log(seanceId)
-  const { film, seanceData } = useSeanceFilm(
-    seanceId?.slice(0, seanceId.indexOf('-')) as string,
-  )
 
-  const hall = seanceId?.charAt(seanceId.length - 1)
+  const { film, seanceData } = useSeanceFilm(seanceId as string)
 
   useEffect(() => {
     async function fetchScheme() {
@@ -34,10 +30,10 @@ export const SelectSeatsStep = () => {
           {film?.filmName}
         </Typography>
         <Typography variant="text-medium" as={'p'}>
-          Начало сеанса - {seanceData?.seanceTime}
+          Начало сеанса: {seanceData?.seanceTime}
         </Typography>
-        <Typography as={'h4'} variant="heading-sm">
-          {hall}
+        <Typography style={{textTransform:'capitalize'}} as={'h4'} variant="heading-sm">
+          {hallName}
         </Typography>
       </div>
     </section>

@@ -1,9 +1,19 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  border: #F1EBE6F2 solid 1px;
+  border-radius: 2px;
 }
 
 .title {
   align-self: flex-start;
+
+  width: 100%;
   padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  background-color: #F1EBE6F2;
 }
