@@ -16,13 +16,15 @@ export const SelectSeatsStep = () => {
 
   useEffect(() => {
     async function fetchScheme() {
-      const scheme = await getScheme(Number(seanceId), date!)
-      setScheme(scheme.result)
+      if (date) {
+        const scheme = await getScheme(Number(seanceId), date)
+        setScheme(scheme.result)
+      }
     }
 
     fetchScheme()
   }, [seanceId, date])
-
+  console.log(sheme)
   return (
     <section className={styles['wrapper']}>
       <div className={styles['title']}>
@@ -32,10 +34,15 @@ export const SelectSeatsStep = () => {
         <Typography variant="text-medium" as={'p'}>
           Начало сеанса: {seanceData?.seanceTime}
         </Typography>
-        <Typography style={{textTransform:'capitalize'}} as={'h4'} variant="heading-sm">
+        <Typography
+          style={{ textTransform: 'capitalize' }}
+          as={'h4'}
+          variant="heading-sm"
+        >
           {hallName}
         </Typography>
       </div>
+      <div></div>
     </section>
   )
 }
