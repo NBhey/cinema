@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton'
 import styles from './TitleSelectSeatsStep.module.css'
 import { Films } from '@/shared/api/type'
 
-interface TitleSelectSeatsStep {
+interface TitleSelectSeatsStepProps {
   film: Films | undefined
   seanceData: {
     id: number
@@ -14,7 +14,7 @@ interface TitleSelectSeatsStep {
   hallName: string | undefined
 }
 
-export const TitleSelectSeatsStep: React.FC<TitleSelectSeatsStep> = ({
+export const TitleSelectSeatsStep: React.FC<TitleSelectSeatsStepProps> = ({
   film,
   seanceData,
   hallName,

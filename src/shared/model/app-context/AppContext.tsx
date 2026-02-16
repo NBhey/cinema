@@ -34,7 +34,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         })
       })
       .catch((error) => console.log(error))
-  }, [])
+  }, [currentDate])
 
   return (
     <AppContext.Provider

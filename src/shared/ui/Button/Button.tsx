@@ -1,7 +1,7 @@
 import styles from './Button.module.css'
 import { CSSProperties } from "react";
 
-interface Button {
+interface ButtonProps {
   text: string
   clickAction?: () => void
   className?: string
@@ -9,7 +9,7 @@ interface Button {
   variant: "calendar" | "enter"
 }
 
-export const Button = ({ text, variant, className='', style={}, clickAction }: Button) => {
+export const Button = ({ text, variant, className='', style={}, clickAction }: ButtonProps) => {
   return (
     <button onClick={clickAction} className={`${styles[variant]} ${className}`} style={style}>
       {text}

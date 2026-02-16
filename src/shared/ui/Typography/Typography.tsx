@@ -1,7 +1,7 @@
 import styles from './Typography.module.css'
 import { ElementType } from 'react'
 
-interface Typography {
+interface TypographyProps {
   as?: ElementType
   variant: string
   children: React.ReactNode
@@ -15,7 +15,7 @@ export const Typography = ({
   className = '',
   children,
   style,
-}: Typography) => {
+}: TypographyProps) => {
   return (
     <Component
       style={{ ...style }}
