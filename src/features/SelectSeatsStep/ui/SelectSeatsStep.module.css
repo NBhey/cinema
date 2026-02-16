@@ -5,15 +5,17 @@
   border-radius: 2px;
 }
 
-.title {
-  align-self: flex-start;
-
-  width: 100%;
-  padding: 15px;
-
+.scheme-container {
+  padding: 15px 0px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  background-color: #171D24;
+}
 
-  background-color: #F1EBE6F2;
+.scheme {
+   margin: 0 auto;
+   max-width: 264px;
+
+   text-align: center;
 }
