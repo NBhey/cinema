@@ -3,9 +3,9 @@ import styles from './FilmCard.module.css'
 import { FilmDescription } from './FilmDescription/FilmDescription'
 import { FilmSessions } from './FilmSessions/FilmSessions'
 
-type FilmCard = Films & { seances: Array<Seances> } & { halls: Array<Hall> }
+type FilmCardProps = Films & { seances: Array<Seances> } & { halls: Array<Hall> }
 
-export const FilmCard: React.FC<FilmCard> = ({
+export const FilmCard: React.FC<FilmCardProps> = ({
   filmDescription: description,
   filmDuration: duration,
   filmName: name,

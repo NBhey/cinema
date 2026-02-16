@@ -20,7 +20,7 @@ function App() {
             <Route path=":date" element={<MainPage />} />
           </Route>
           <Route
-            path="/:date/halls/:hallId/seances/:seanceId"
+            path="/:date/halls/:hallName/seances/:seanceId"
             element={<BookingLayout />}
           >
             <Route index element={<SelectSeatsStep />} />

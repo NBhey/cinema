@@ -8,5 +8,7 @@
   flex-direction: column;
   gap: 10px;
 
-  background-color: #F1EBE6F2;
+  background-color: #f1ebe6f2;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
 }

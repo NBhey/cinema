@@ -1,6 +1,6 @@
 import styles from './FilmDescription.module.css'
 
-interface FilmDescription {
+interface FilmDescriptionProps {
   description: string
   country: string
   name: string
@@ -14,7 +14,7 @@ export const FilmDescription = ({
   country,
   description,
   duration,
-}: FilmDescription) => {
+}: FilmDescriptionProps) => {
   return (
     <div className={styles.block}>
       <img className={styles.poster} src={poster} alt={name} />

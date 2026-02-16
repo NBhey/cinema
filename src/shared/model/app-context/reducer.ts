@@ -3,10 +3,10 @@ import { AllDataFilm } from '@/shared/api/type'
 export type State = {
   isLoading: boolean
   result: AllDataFilm | null
-   success?: boolean
+  success?: boolean
 }
 
-export const initialState: State = {isLoading: false, result: null }
+export const initialState: State = { isLoading: false, result: null }
 
 export const stateReducer = (
   state: State,
@@ -22,4 +22,3 @@ export const stateReducer = (
       return state
   }
 }
-

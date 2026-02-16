@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { DayCard } from './DayCard'
 import style from './Calendar.module.css'
 import { Button } from '@/shared/ui/Button/Button'
-import { useParams } from 'react-router'
 
 const arrayDaysOfWeek = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
 

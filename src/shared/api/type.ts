@@ -28,7 +28,7 @@ export interface Seances {
 }
 
 export type AllDataFilm = {
-  halls: Hall
+  halls: Hall[]
   films: Films[]
   seances: Seances[]
 }

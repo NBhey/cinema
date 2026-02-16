@@ -1,6 +1,6 @@
 import { API_CONFIG } from './config'
 import axios, { AxiosInstance } from 'axios'
-import { AllDataFilm, Hall, Scheme, Seances } from './type'
+import { AllDataFilm, Scheme, Seances } from './type'
 import camelcaseKeys from 'camelcase-keys'
 
 const instance: AxiosInstance = axios.create({
@@ -8,9 +8,7 @@ const instance: AxiosInstance = axios.create({
 })
 
 instance.interceptors.response.use((response) => {
-  console.log(response)
   const data = camelcaseKeys(response.data, { deep: true })
-  console.log(data)
   return data
 })
 

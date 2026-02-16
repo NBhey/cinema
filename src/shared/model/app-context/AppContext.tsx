@@ -30,7 +30,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       .then((result) => {
         dispatch({
           type: 'UPDATE_ALL_STATE',
-          payload: { isLoading: true, ...result },
+          payload: { isLoading: true, ...result, currentDate, setCurrentDate },
         })
       })
       .catch((error) => console.log(error))
@@ -51,5 +51,5 @@ export const useData = () => {
     return { state: data.state, dispatch: data.dispatch }
   }
 
-  throw new Error ('Данные не пришли')
+  throw new Error('Данные не пришли')
 }

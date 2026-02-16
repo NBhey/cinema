@@ -1,8 +1,6 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  border: #F1EBE6F2 solid 1px;
-  border-radius: 2px;
 }
 
 .scheme-container {
