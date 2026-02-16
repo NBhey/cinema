@@ -33,6 +33,7 @@ export const FilmList: React.FC = () => {
       const sharedProps = { ...film, seances, halls }
       return <FilmCard key={film.id} {...sharedProps} />
     }
+    return null
   })
 
   return <main className={styles['film-list']}>{list}</main>
