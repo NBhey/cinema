@@ -1,0 +1,12 @@
+.title {
+  align-self: flex-start;
+
+  width: 100%;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  background-color: #F1EBE6F2;
+}
