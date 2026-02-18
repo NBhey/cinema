@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+html {
+  background-image: url('../shared/assets/main-background.jpg');
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-color: #c87201;
+  background-position: center;
+  background-size: cover;
+}
 :root {
   --font-main: 'Roboto', sans-serif;
 
