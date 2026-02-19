@@ -11,7 +11,7 @@
     0 0 3px #0000001f;
 }
 
-.enter:hover { 
+.enter:hover {
   background-color: azure;
   color: black;
 }
@@ -30,4 +30,25 @@
 
 .calendar:hover {
   background-color: azure;
+}
+
+.booking {
+  margin: 0 auto;
+  display: block;
+  background-color: #16a6af;
+  border: none;
+  text-align: center;
+  padding: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  box-shadow:
+    0 3px 3px #0000003d,
+    0 0 3px #0000001f;
+  text-transform: uppercase;
+}
+
+.booking:hover {
+  background-color: azure;
+  color: black;
 }

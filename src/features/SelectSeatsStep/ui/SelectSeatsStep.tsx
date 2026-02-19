@@ -11,11 +11,12 @@ import screen from '@/shared/assets/screen.png'
 import { TitleSelectSeatsStep } from './TitleSelectSeatsStep/TitleSelectSeatsStep'
 import { Loader } from '@/shared/ui/Loader/Loader'
 import { SchemeConfigurate } from './Scheme/SchemeConfigurate'
+import { Button } from '@/shared/ui/Button/Button'
 
 export const SelectSeatsStep = () => {
   const { date, hallName, seanceId } = useParams()
   const [scheme, setScheme] = useState<Scheme['result']>([])
-
+  const [seats, setSeats] = useState<number[][]>([])
   const { film, seanceData } = useSeanceFilm(seanceId as string)
 
   useEffect(() => {
@@ -43,12 +44,13 @@ export const SelectSeatsStep = () => {
           alt="экран"
         />
         <div className={styles['scheme']}>
-          {scheme.length === 0 ? (
-            <Loader color="#de9741" size={75} />
-          ) : (
-            <SchemeConfigurate configurateion={scheme} />
-          )}
+          {scheme.length === 0 && <Loader color="#de9741" size={75} />}
+          <SchemeConfigurate choosePlace={setScheme} configuration={scheme} />
         </div>
+      </div>
+
+      <div className={styles['booking-btn']}>
+        <Button text="Забронировать" variant="booking" />
       </div>
     </section>
   )
