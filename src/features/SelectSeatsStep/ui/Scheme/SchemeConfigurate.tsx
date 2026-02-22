@@ -21,13 +21,11 @@ const PlaceStatusImage = {
 }
 
 export const SchemeConfigurate = ({
-  originalSheme,
   configuration,
   choosePlace,
 }: {
-  originalSheme?: Scheme
   configuration: Scheme['result']
-  choosePlace: Dispatch<SetStateAction<Scheme['result']>>
+  choosePlace: (indexRow: number, indexPlace: number, place: string) => void
 }) => {
   return (
     <>
@@ -35,86 +33,17 @@ export const SchemeConfigurate = ({
         return (
           <p key={indexRow}>
             {row.map((place, indexPlace) => {
-              if (place === 'standart') {
-                return (
-                  <img
-                    key={`${[...[indexRow, indexPlace]]}`}
-                    onClick={() => {
-                      choosePlace((prev) => {
-                        const newScheme = prev.map((row, r) =>
-                          r === indexRow
-                            ? row.map((cell, c) =>
-                                c === indexPlace
-                                  ? cell === 'standart'
-                                    ? 'booking'
-                                    : 'standart'
-                                  : cell,
-                              )
-                            : row,
-                        )
-                        return newScheme
-                      })
-                    }}
-                    src={PlaceStatusImage[place]}
-                    alt={PlaceStatusImage[place]}
-                    style={{ height: 20, width: 20, cursor: 'pointer' }}
-                  />
-                )
-              }
-              if (place === 'vip') {
-                return (
-                  <img
-                    key={`${[...[indexRow, indexPlace]]}`}
-                    onClick={() => {
-                      choosePlace((prev) => {
-                        const newScheme = prev.map((row, r) =>
-                          r === indexRow
-                            ? row.map((cell, c) =>
-                                c === indexPlace
-                                  ? cell === 'vip'
-                                    ? 'booking'
-                                    : 'vip'
-                                  : cell,
-                              )
-                            : row,
-                        )
-
-                        return newScheme
-                      })
-                    }}
-                    src={PlaceStatusImage[place]}
-                    alt={PlaceStatusImage[place]}
-                    style={{ height: 20, width: 20, cursor: 'pointer' }}
-                  />
-                )
-              }
-
-              if (place === 'booking') {
-                return (
-                  <img
-                    key={`${[...[indexRow, indexPlace]]}`}
-                    onClick={() => {
-                      choosePlace((prev) => {
-                        const newScheme = [...prev]
-
-                        newScheme[indexRow][indexPlace] =
-                          originalSheme?.result?.[indexRow]?.[indexPlace]!
-
-                        return newScheme
-                      })
-                    }}
-                    src={PlaceStatusImage[place]}
-                    alt={PlaceStatusImage[place]}
-                    style={{ height: 20, width: 20, cursor: 'pointer' }}
-                  />
-                )
-              }
               return (
                 <img
                   key={`${[...[indexRow, indexPlace]]}`}
+                  onClick={() => choosePlace(indexRow, indexPlace, place)}
                   src={PlaceStatusImage[place]}
                   alt={PlaceStatusImage[place]}
-                  style={{ height: 20, width: 20, cursor: 'not-allowed' }}
+                  style={{
+                    height: 20,
+                    width: 20,
+                    cursor: place === 'disabled' ? 'not-allowed' : 'pointer',
+                  }}
                 />
               )
             })}
