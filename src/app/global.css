@@ -7,11 +7,12 @@
 html {
   background-image: url('../shared/assets/main-background.jpg');
   background-repeat: no-repeat;
-  min-height: 100vh;
+  min-height: 100%;
   background-color: #c87201;
   background-position: center;
   background-size: cover;
 }
+
 :root {
   --font-main: 'Roboto', sans-serif;
 
