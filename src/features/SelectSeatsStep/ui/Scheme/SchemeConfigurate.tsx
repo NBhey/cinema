@@ -3,15 +3,8 @@ import taken from '@/shared/assets/taken.png'
 import place from '@/shared/assets/vip_places.png'
 import standart from '@/shared/assets/standart_places.png'
 import booking from '@/shared/assets/booking.png'
-import { Dispatch, SetStateAction } from 'react'
+import { PlaceStatus } from '@/features/SelectSeatsStep/model'
 
-enum PlaceStatus {
-  taken = 'taken',
-  standart = 'standart',
-  vip = 'vip',
-  booking = 'booking',
-  disabled = 'disabled',
-}
 const PlaceStatusImage = {
   [PlaceStatus.taken]: taken,
   [PlaceStatus.standart]: standart,
