@@ -1,6 +1,6 @@
 import { getScheme } from '@/shared/api/http'
 import type { Scheme } from '@/shared/api/type'
-
+import { PlaceStatus } from '@/features/SelectSeatsStep/model'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSeanceFilm } from '../lib/useSeanceFilm'
@@ -12,11 +12,27 @@ import { TitleSelectSeatsStep } from './TitleSelectSeatsStep/TitleSelectSeatsSte
 import { Loader } from '@/shared/ui/Loader/Loader'
 import { SchemeConfigurate } from './Scheme/SchemeConfigurate'
 import { Button } from '@/shared/ui/Button/Button'
+
+import taken from '@/shared/assets/taken.png'
+import place from '@/shared/assets/vip_places.png'
+import standart from '@/shared/assets/standart_places.png'
+import booking from '@/shared/assets/booking.png'
+import { Typography } from '@/shared/ui/Typography/Typography'
+
 let originalSheme: Scheme
+
+const PlaceStatusImage = {
+  [PlaceStatus.taken]: taken,
+  [PlaceStatus.standart]: standart,
+  [PlaceStatus.vip]: place,
+  [PlaceStatus.booking]: booking,
+  [PlaceStatus.disabled]: taken,
+}
+
 export const SelectSeatsStep = () => {
   const { date, hallName, seanceId } = useParams()
   const [scheme, setScheme] = useState<Scheme['result']>([])
-  const [seats, setSeats] = useState<number[][]>([])
+  // const [seats, setSeats] = useState<number[][]>([])
   const { film, seanceData } = useSeanceFilm(seanceId as string)
 
   useEffect(() => {
@@ -97,6 +113,49 @@ export const SelectSeatsStep = () => {
             choosePlace={handleChoosePlace}
             configuration={scheme}
           />
+        </div>
+
+        <div className={styles.descriptionPlace}>
+          <div>
+            <Typography
+              style={{ color: '#ffffff' }}
+              variant="text-medium"
+              as="span"
+            >
+              Свободно
+            </Typography>
+            <img src={PlaceStatusImage.standart} alt="Свободно" />
+          </div>
+          <div>
+            <Typography
+              style={{ color: '#ffffff' }}
+              variant="text-medium"
+              as="span"
+            >
+              Свободно VIP
+            </Typography>
+            <img src={PlaceStatusImage.vip} alt="Свободно VIP" />
+          </div>
+          <div>
+            <Typography
+              style={{ color: '#ffffff' }}
+              variant="text-medium"
+              as="span"
+            >
+              Занято
+            </Typography>
+            <img src={PlaceStatusImage.disabled} alt="Занято" />
+          </div>
+          <div>
+            <Typography
+              style={{ color: '#ffffff' }}
+              variant="text-medium"
+              as="span"
+            >
+              Выбрано
+            </Typography>
+            <img src={PlaceStatusImage.booking} alt="Выбрано" />
+          </div>
         </div>
       </div>
 
