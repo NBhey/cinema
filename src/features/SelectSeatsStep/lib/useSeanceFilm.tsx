@@ -11,6 +11,8 @@ export const useSeanceFilm = (seanceId: string) => {
     const film = data.state.result?.films.find(
       (film) => film.id === seanceData?.seanceFilmid,
     )
-    return { film, seanceData }
+    const halls = data.state.result?.halls
+
+    return { film, seanceData, halls }
   }, [data.state.result, seanceId])
 }

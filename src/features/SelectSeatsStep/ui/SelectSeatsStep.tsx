@@ -32,14 +32,12 @@ const PlaceStatusImage = {
 export const SelectSeatsStep = () => {
   const { date, hallName, seanceId } = useParams()
   const [scheme, setScheme] = useState<Scheme['result']>([])
-  // const [seats, setSeats] = useState<number[][]>([])
-  const { film, seanceData } = useSeanceFilm(seanceId as string)
+  const { film, seanceData, halls } = useSeanceFilm(seanceId as string)
 
   useEffect(() => {
     async function fetchScheme() {
       if (date) {
         originalSheme = await getScheme(Number(seanceId), date)
-        console.log(originalSheme)
         setScheme(originalSheme.result)
       }
     }
@@ -115,28 +113,29 @@ export const SelectSeatsStep = () => {
           />
         </div>
 
-        <div className={styles.descriptionPlace}>
-          <div>
-            <Typography
-              style={{ color: '#ffffff' }}
-              variant="text-medium"
-              as="span"
-            >
-              Свободно
-            </Typography>
+        <div className={styles['descriptionPlace']}>
+          <div className={styles['descriptionTargetPlace']}>
             <img src={PlaceStatusImage.standart} alt="Свободно" />
-          </div>
-          <div>
             <Typography
               style={{ color: '#ffffff' }}
               variant="text-medium"
               as="span"
             >
-              Свободно VIP
+              Свободно ({halls?.[0].hallPriceStandart} руб)
             </Typography>
-            <img src={PlaceStatusImage.vip} alt="Свободно VIP" />
           </div>
-          <div>
+          <div className={styles['descriptionTargetPlace']}>
+            <img src={PlaceStatusImage.vip} alt="Свободно VIP" />
+            <Typography
+              style={{ color: '#ffffff' }}
+              variant="text-medium"
+              as="span"
+            >
+              Свободно VIP ({halls?.[0].hallPriceVip} руб)
+            </Typography>
+          </div>
+          <div className={styles['descriptionTargetPlace']}>
+            <img src={PlaceStatusImage.disabled} alt="Занято" />
             <Typography
               style={{ color: '#ffffff' }}
               variant="text-medium"
@@ -144,9 +143,13 @@ export const SelectSeatsStep = () => {
             >
               Занято
             </Typography>
-            <img src={PlaceStatusImage.disabled} alt="Занято" />
           </div>
-          <div>
+          <div className={styles['descriptionTargetPlace']}>
+            <img
+              style={{ width: 24, height: 24 }}
+              src={PlaceStatusImage.booking}
+              alt="Выбрано"
+            />
             <Typography
               style={{ color: '#ffffff' }}
               variant="text-medium"
@@ -154,7 +157,6 @@ export const SelectSeatsStep = () => {
             >
               Выбрано
             </Typography>
-            <img src={PlaceStatusImage.booking} alt="Выбрано" />
           </div>
         </div>
       </div>

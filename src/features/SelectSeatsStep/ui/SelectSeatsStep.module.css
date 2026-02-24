@@ -33,4 +33,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  column-gap: 14px;
+}
+
+.descriptionTargetPlace {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

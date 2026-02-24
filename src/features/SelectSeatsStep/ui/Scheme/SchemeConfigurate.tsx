@@ -29,13 +29,24 @@ export const SchemeConfigurate = ({
               return (
                 <img
                   key={`${[...[indexRow, indexPlace]]}`}
-                  onClick={() => choosePlace(indexRow, indexPlace, place)}
+                  onClick={() => {
+                    if (
+                      place === PlaceStatus.disabled ||
+                      place === PlaceStatus.taken
+                    ) {
+                      return null
+                    }
+                    choosePlace(indexRow, indexPlace, place)
+                  }}
                   src={PlaceStatusImage[place]}
                   alt={PlaceStatusImage[place]}
                   style={{
                     height: 20,
                     width: 20,
-                    cursor: place === 'disabled' ? 'not-allowed' : 'pointer',
+                    cursor:
+                      place === 'disabled' || place === 'taken'
+                        ? 'not-allowed'
+                        : 'pointer',
                   }}
                 />
               )
