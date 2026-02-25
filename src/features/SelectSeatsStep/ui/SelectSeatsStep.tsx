@@ -1,8 +1,8 @@
 import { getScheme } from '@/shared/api/http'
 import type { Scheme } from '@/shared/api/type'
 import { PlaceStatus } from '@/features/SelectSeatsStep/model'
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSeanceFilm } from '../lib/useSeanceFilm'
 
 import styles from './SelectSeatsStep.module.css'
@@ -33,12 +33,21 @@ export const SelectSeatsStep = () => {
   const { date, hallName, seanceId } = useParams()
   const [scheme, setScheme] = useState<Scheme['result']>([])
   const { film, seanceData, halls } = useSeanceFilm(seanceId as string)
+  const selectedSeatsRef = useRef<Array<Record<string, number>>>([])
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (localStorage.getItem('selectedSeats')) {
+      localStorage.removeItem('selectedSeats')
+    }
+  }, [])
 
   useEffect(() => {
     async function fetchScheme() {
       if (date) {
         originalSheme = await getScheme(Number(seanceId), date)
         setScheme(originalSheme.result)
+        selectedSeatsRef.current = []
       }
     }
 
@@ -51,6 +60,28 @@ export const SelectSeatsStep = () => {
     place: string,
   ) => {
     console.log('ряд :', indexRow + 1, 'место :', indexPlace + 1)
+    let isBookingThisPlace
+
+    for (let item of selectedSeatsRef.current) {
+      if (item['ряд'] === indexRow + 1 && item['место'] === indexPlace + 1) {
+        isBookingThisPlace = true
+        break
+      }
+    }
+
+    if (isBookingThisPlace) {
+      selectedSeatsRef.current = selectedSeatsRef.current.filter((item) => {
+        return !(
+          item['ряд'] === indexRow + 1 && item['место'] === indexPlace + 1
+        )
+      })
+    } else {
+      selectedSeatsRef.current.push({
+        ряд: indexRow + 1,
+        место: indexPlace + 1,
+      })
+    }
+
     setScheme((prev) => {
       switch (place) {
         case 'disabled':
@@ -92,6 +123,13 @@ export const SelectSeatsStep = () => {
     })
   }
 
+  const handleBooking = () => {
+    localStorage.setItem(
+      'selectedSeats',
+      JSON.stringify({ date, seats: selectedSeatsRef.current }),
+    )
+    navigate('confirm')
+  }
   return (
     <section className={styles['wrapper']}>
       <TitleSelectSeatsStep
@@ -162,7 +200,11 @@ export const SelectSeatsStep = () => {
       </div>
 
       <div className={styles['booking-btn']}>
-        <Button text="Забронировать" variant="booking" />
+        <Button
+          clickAction={handleBooking}
+          text="Забронировать"
+          variant="booking"
+        />
       </div>
     </section>
   )
