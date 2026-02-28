@@ -6,6 +6,7 @@ import { BookingLayout } from '@/widgets/Booking/ui/BookingLayout'
 import { SelectSeatsStep } from './features/SelectSeatsStep'
 import { ConfirmStep } from './features/ConfirmStep'
 import { MainPageLayout } from './pages/MainPage/ui/layout/MainPageLayout'
+import { DateGuard } from './pages/MainPage/ui/layout/DateGuard'
 
 function App() {
   return (
@@ -13,14 +14,17 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPageLayout />}>
           <Route index element={<MainPage />} />
-          <Route path=":date" element={<MainPage />} />
 
-          <Route
-            path=":date/halls/:hallName/seances/:seanceId"
-            element={<BookingLayout />}
-          >
-            <Route index element={<SelectSeatsStep />} />
-            <Route path="confirm" element={<ConfirmStep />} />
+          <Route path=":date" element={<DateGuard />}>
+            <Route index element={<MainPage />} />
+
+            <Route
+              path="halls/:hallName/seances/:seanceId"
+              element={<BookingLayout />}
+            >
+              <Route index element={<SelectSeatsStep />} />
+              <Route path="confirm" element={<ConfirmStep />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
