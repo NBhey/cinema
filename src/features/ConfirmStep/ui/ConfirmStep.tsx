@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useSeanceFilm } from '@/features/SelectSeatsStep/lib/useSeanceFilm'
 
 export const ConfirmStep = () => {
-  const { date, hallName, seanceId } = useParams()
+  const { hallName, seanceId } = useParams()
   const { film, seanceData, halls } = useSeanceFilm(seanceId as string)
 
   const selectedSeatsString = localStorage.getItem('selectedSeats')

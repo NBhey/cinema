@@ -19,9 +19,6 @@ import standart from '@/shared/assets/standart_places.png'
 import booking from '@/shared/assets/booking.png'
 import { Typography } from '@/shared/ui/Typography/Typography'
 
-//TODO подумать о том, чтобы положить внутрь компонента переменную
-let originalSheme: Scheme
-
 const PlaceStatusImage = {
   [PlaceStatus.taken]: taken,
   [PlaceStatus.standart]: standart,
