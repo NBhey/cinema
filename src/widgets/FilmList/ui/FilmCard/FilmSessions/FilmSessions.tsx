@@ -10,7 +10,7 @@ type seanceIdField = Record<
     seanceId: number[]
     seanceFilmId: number
     seanceTime: string[]
-    hallName?:string
+    hallName?: string
   }
 >
 
@@ -24,7 +24,6 @@ export const FilmSessions = ({
   const seanceIdField: seanceIdField = {}
   const { date } = useParams()
 
- 
   const today = new Date().toLocaleDateString('en-CA')
   const selectedDate = date ?? today
   const isToday = selectedDate === today
@@ -46,7 +45,7 @@ export const FilmSessions = ({
       }
     }
   })
- 
+
   for (const seance in seanceIdField) {
     const hall = halls.find((hall) => hall.id === seanceIdField[seance].hallid)
     if (hall) {
@@ -54,7 +53,6 @@ export const FilmSessions = ({
     }
   }
 
-  console.log('seanceIdField', seanceIdField)
   return (
     <div>
       {Object.keys(seanceIdField).map((seance, numberHall) => {

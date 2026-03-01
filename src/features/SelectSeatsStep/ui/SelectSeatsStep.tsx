@@ -19,6 +19,7 @@ import standart from '@/shared/assets/standart_places.png'
 import booking from '@/shared/assets/booking.png'
 import { Typography } from '@/shared/ui/Typography/Typography'
 
+//TODO подумать о том, чтобы положить внутрь компонента переменную
 let originalSheme: Scheme
 
 const PlaceStatusImage = {
@@ -33,7 +34,8 @@ export const SelectSeatsStep = () => {
   const { date, hallName, seanceId } = useParams()
   const [scheme, setScheme] = useState<Scheme['result']>([])
   const { film, seanceData, halls } = useSeanceFilm(seanceId as string)
-  const selectedSeatsRef = useRef<Array<Record<string, number>>>([])
+  const selectedSeatsRef = useRef<Array<Record<string, number | string>>>([])
+  const originalSheme = useRef<Scheme>({ result: [], success: false })
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -45,8 +47,8 @@ export const SelectSeatsStep = () => {
   useEffect(() => {
     async function fetchScheme() {
       if (date) {
-        originalSheme = await getScheme(Number(seanceId), date)
-        setScheme(originalSheme.result)
+        originalSheme.current = await getScheme(Number(seanceId), date)
+        setScheme(originalSheme.current.result)
         selectedSeatsRef.current = []
       }
     }
@@ -59,11 +61,18 @@ export const SelectSeatsStep = () => {
     indexPlace: number,
     place: string,
   ) => {
-    console.log('ряд :', indexRow + 1, 'место :', indexPlace + 1)
+    console.log(
+      'ряд :',
+      indexRow + 1,
+      'место :',
+      indexPlace + 1,
+      'статус :',
+      place,
+    )
     let isBookingThisPlace
 
     for (let item of selectedSeatsRef.current) {
-      if (item['ряд'] === indexRow + 1 && item['место'] === indexPlace + 1) {
+      if (item['row'] === indexRow + 1 && item['place'] === indexPlace + 1) {
         isBookingThisPlace = true
         break
       }
@@ -72,13 +81,14 @@ export const SelectSeatsStep = () => {
     if (isBookingThisPlace) {
       selectedSeatsRef.current = selectedSeatsRef.current.filter((item) => {
         return !(
-          item['ряд'] === indexRow + 1 && item['место'] === indexPlace + 1
+          item['row'] === indexRow + 1 && item['place'] === indexPlace + 1
         )
       })
     } else {
       selectedSeatsRef.current.push({
-        ряд: indexRow + 1,
-        место: indexPlace + 1,
+        row: indexRow + 1,
+        place: indexPlace + 1,
+        status: place,
       })
     }
 
@@ -114,7 +124,7 @@ export const SelectSeatsStep = () => {
         case 'booking':
           const newScheme = prev.map((el) => el.map((item) => item))
           newScheme[indexRow][indexPlace] =
-            originalSheme?.result?.[indexRow]?.[indexPlace]!
+            originalSheme.current?.result?.[indexRow]?.[indexPlace]!
 
           return newScheme
       }
@@ -124,6 +134,10 @@ export const SelectSeatsStep = () => {
   }
 
   const handleBooking = () => {
+    if (selectedSeatsRef.current.length === 0) {
+      alert('Вы не выбрали места')
+      return
+    }
     localStorage.setItem(
       'selectedSeats',
       JSON.stringify({ date, seats: selectedSeatsRef.current }),

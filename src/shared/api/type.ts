@@ -1,4 +1,4 @@
-type HallPlaces = 'standart' | 'vip' | 'taken' | 'disabled'
+type HallPlaces = 'standart' | 'vip' | 'taken' | 'disabled' | 'booking'
 
 export interface Hall {
   id: number
@@ -34,6 +34,6 @@ export type AllDataFilm = {
 }
 
 export type Scheme = {
-  result:Array<HallPlaces[]>
+  result: Array<HallPlaces[]>
   success: boolean
 }

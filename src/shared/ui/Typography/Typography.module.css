@@ -9,6 +9,13 @@
   font-weight: var(--fw-lighter);
 }
 
+.heading-bold {
+  font-family: var(--font-main);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-22);
+  line-height: var(--lh-26);
+}
+
 .heading-sm {
   font-family: var(--font-main);
   font-weight: var(--fw-bold);

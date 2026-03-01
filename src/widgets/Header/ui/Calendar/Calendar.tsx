@@ -35,9 +35,9 @@ export const Calendar = () => {
       startDate.getMonth(),
       i,
     )
-    
+
     calendarList.push({
-      currentDate: currentDate.toLocaleDateString("en-CA"),
+      currentDate: currentDate.toLocaleDateString('en-CA'),
       day: currentDate.getDate(),
       dayOfWeek: {
         dayOfWeek: currentDate.getDay(),
@@ -66,7 +66,7 @@ export const Calendar = () => {
       return new Date(
         prevDate.getFullYear(),
         prevDate.getMonth(),
-        prevDate.getDate() - 6,
+        prevDate.getDate() - 5,
       )
     })
   }
@@ -76,7 +76,7 @@ export const Calendar = () => {
       return new Date(
         prevDate.getFullYear(),
         prevDate.getMonth(),
-        prevDate.getDate() + 6,
+        prevDate.getDate() + 5,
       )
     })
   }

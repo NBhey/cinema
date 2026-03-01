@@ -34,7 +34,7 @@ export const buyTicket = (parameters: {
   place: number
   coast: number
 }) => {
-  const ticketResult = instance
+  const ticketResult = api
     .post('ticket', parameters)
     .then((response) => response)
     .catch((error) => error)
@@ -42,4 +42,4 @@ export const buyTicket = (parameters: {
   return ticketResult
 }
 
-// TODO Для админа(пока делаем только пользователя)
+// TODO Для админа(пока делаем только пользователя) возможно запросы для админа будут через танстак квери для тренировки

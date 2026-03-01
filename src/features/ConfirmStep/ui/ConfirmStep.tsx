@@ -10,12 +10,12 @@ export const ConfirmStep = () => {
   const selectedSeatsString = localStorage.getItem('selectedSeats')
   const selectedSeatsInfo: {
     date: string
-    seats: Array<{ ряд: number; место: number }>
+    seats: Array<{ row: number; place: number }>
   } = selectedSeatsString ? JSON.parse(selectedSeatsString) : null
 
-  const selectedSeats = selectedSeatsInfo?.seats.map((seat) => seat.место)
+  const selectedSeats = selectedSeatsInfo?.seats.map((seat) => seat.place)
 
-  console.log('selectedSeats', seanceData)
+  console.log('halls', halls)
   return (
     <section className={styles['wrapper']}>
       <div className={styles['headerConfirm']}>
