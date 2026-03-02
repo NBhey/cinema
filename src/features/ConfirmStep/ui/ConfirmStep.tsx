@@ -2,6 +2,7 @@ import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './ConfirmStep.module.css'
 import { useParams } from 'react-router-dom'
 import { useSeanceFilm } from '@/features/SelectSeatsStep/lib/useSeanceFilm'
+import { Hall } from '@/shared/api/type'
 
 export const ConfirmStep = () => {
   const { hallName, seanceId } = useParams()
@@ -10,12 +11,24 @@ export const ConfirmStep = () => {
   const selectedSeatsString = localStorage.getItem('selectedSeats')
   const selectedSeatsInfo: {
     date: string
-    seats: Array<{ row: number; place: number }>
+    seats: Array<{ row: number; place: number; status: 'standart' | 'vip' }>
   } = selectedSeatsString ? JSON.parse(selectedSeatsString) : null
 
   const selectedSeats = selectedSeatsInfo?.seats.map((seat) => seat.place)
+  const currentHallInfo = halls?.find((hall) => hall.hallName === hallName)
 
-  console.log('halls', halls)
+  const cost = currentHallInfo
+    ? selectedSeatsInfo.seats.reduce((acc, seat) => {
+        if (seat.status === 'standart') {
+          return (acc += currentHallInfo.hallPriceStandart)
+        } else if (seat.status === 'vip') {
+          return (acc += currentHallInfo.hallPriceVip)
+        }
+        return acc
+      }, 0)
+    : 0
+
+  console.log('selectedSeatsInfo', selectedSeatsInfo)
   return (
     <section className={styles['wrapper']}>
       <div className={styles['headerConfirm']}>
@@ -50,6 +63,13 @@ export const ConfirmStep = () => {
           Начало сеанса:{' '}
           <Typography as="span" variant="heading-sm">
             {seanceData?.seanceTime}
+          </Typography>
+        </Typography>
+
+        <Typography as="p" variant="text-regular">
+          Стоимость:{' '}
+          <Typography as="span" variant="heading-sm">
+            {cost} рублей
           </Typography>
         </Typography>
       </section>
