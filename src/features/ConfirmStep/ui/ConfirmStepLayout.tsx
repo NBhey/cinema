@@ -2,16 +2,11 @@ import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './ConfirmStep.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSeanceFilm } from '@/features/SelectSeatsStep/lib/useSeanceFilm'
-import QRCode from 'react-qr-code'
-import { Button } from '@/shared/ui/Button/Button'
 import { ConfirmStepInfo } from './ConfirmStepInfo/ConfirmStepInfo'
-import { useState } from 'react'
 import { buyTicket } from '@/shared/api/http'
-import { Loader } from '@/shared/ui/Loader/Loader'
+import { Outlet } from 'react-router-dom'
 
-export const ConfirmStep = () => {
-  const [showQR, setShowQR] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+export const ConfirmStepLayout = () => {
   const { hallName, seanceId, date } = useParams()
   const { film, seanceData, halls } = useSeanceFilm(seanceId as string)
   const navigate = useNavigate()
@@ -43,8 +38,6 @@ export const ConfirmStep = () => {
     : 0
 
   const handleBookingClick = async () => {
-    setIsLoading(true)
-
     const tickets = selectedSeatsInfo?.seats.map((seat) => ({
       row: Number(seat.row),
       place: Number(seat.place),
@@ -57,15 +50,18 @@ export const ConfirmStep = () => {
         ticketDate: String(date),
         tickets: JSON.stringify(tickets),
       })
-
-      if (response.success) {
-        setShowQR(true)
-      }
+      const responseTickets = response.result.map((ticket: any) => {
+        return ticket.id
+      })
+      navigate(`${responseTickets.join('&')}`)
+      console.log('Ответ от сервера при бронировании билета:', response)
     } catch (error) {
       console.error('Ошибка при бронировании билета:', error)
-    } finally {
-      setIsLoading(false)
     }
+  }
+
+  const value = {
+    handleBookingClick,
   }
 
   const infoBlock = {
@@ -91,34 +87,9 @@ export const ConfirmStep = () => {
       <div className={styles['bodyConfirm']}>
         <ConfirmStepInfo {...infoBlock} />
 
-        {showQR ? (
-          <>
-            {isLoading && <Loader margin="0 auto" size={55} />}
-            <QRCode
-              style={{ margin: '0 auto' }}
-              size={186}
-              value={'https://github.com/NBhey'}
-            />
-          </>
-        ) : (
-          <Button
-            style={{ maxWidth: 337, width: '100%', marginBottom: '9px' }}
-            text="Получить код бронирования"
-            variant="booking"
-            clickAction={handleBookingClick}
-          />
-        )}
+        <Outlet context={value} />
 
         <Typography as="p" variant="text-medium">
-          {' '}
-          {showQR
-            ? `Покажите QR-код нашему контроллеру для подтверждения бронирования.`
-            : `После оплаты билет будет доступен в этом окне, а также придёт вам на почту.
-           Покажите QR-код нашему контроллёру у входа в зал.`}
-        </Typography>
-
-        <Typography as="p" variant="text-medium">
-          {' '}
           Приятного просмотра!
         </Typography>
       </div>

@@ -1,1 +1,1 @@
-export { ConfirmStep } from './ui/ConfirmStep'
+export { ConfirmStepLayout } from './ui/ConfirmStepLayout'
