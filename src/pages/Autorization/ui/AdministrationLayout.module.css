@@ -1,0 +1,8 @@
+.administration {
+  background-image: url('../../../shared/assets/administration-background.jpg');
+  background-repeat: no-repeat;
+  min-height: 100%;
+  background-color: #150242;
+  background-position: center;
+  background-size: cover;
+}
