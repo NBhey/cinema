@@ -11,7 +11,9 @@ export const TitleBlock = () => {
         <BrandTitle />
       </Link>
 
-      <Button text="войти" variant="enter" />
+      <Link to="/login">
+        <Button text="войти" variant="enter" />
+      </Link>
     </div>
   )
 }

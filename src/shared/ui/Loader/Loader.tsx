@@ -1,9 +1,17 @@
 import styles from './Loader.module.css'
 
-export const Loader = ({ size, color }: { size: number; color?: string }) => {
+export const Loader = ({
+  size,
+  color,
+  margin,
+}: {
+  size: number
+  color?: string
+  margin?: string
+}) => {
   return (
     <svg
-      style={{ color }}
+      style={{ color, margin }}
       className={styles.loader}
       width={size}
       height={size}
