@@ -11,8 +11,8 @@ export const AdministrationLayout = () => {
   }, [])
 
   return (
-    <>
+    <div className={styles['wrapper']}>
       <Outlet />
-    </>
+    </div>
   )
 }
