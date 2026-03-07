@@ -58,14 +58,6 @@ export const SelectSeatsStep = () => {
     indexPlace: number,
     place: string,
   ) => {
-    console.log(
-      'ряд :',
-      indexRow + 1,
-      'место :',
-      indexPlace + 1,
-      'статус :',
-      place,
-    )
     let isBookingThisPlace
 
     for (let item of selectedSeatsRef.current) {

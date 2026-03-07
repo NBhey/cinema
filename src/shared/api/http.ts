@@ -30,9 +30,9 @@ export const getScheme = async (
 }
 
 export const buyTicket = (parameters: {
-  row: number
-  place: number
-  coast: number
+  seanceId: number
+  ticketDate: string
+  tickets: string
 }) => {
   const ticketResult = api
     .post('ticket', parameters)

@@ -45,6 +45,7 @@ export const ConfirmStepLayout = () => {
     }))
 
     try {
+      // TODO: заменить тип any на конкретный тип ответа от сервера
       const response: any = await buyTicket({
         seanceId: Number(seanceId),
         ticketDate: String(date),

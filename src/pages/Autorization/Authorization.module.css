@@ -1,0 +1,11 @@
+.header {
+  padding: 35px 42px;
+}
+
+.subtitle {
+  color: #ffffff;
+  line-height: 12px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
