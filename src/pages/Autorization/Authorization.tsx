@@ -1,4 +1,3 @@
-import { BrandTitle } from '@/shared/ui'
 import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './Authorization.module.css'
 import { Button } from '@/shared/ui/Button/Button'
@@ -6,6 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { authenticateAdmin } from '@/shared/api/http'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useNavigate } from 'react-router-dom'
 
 type FormValues = {
   login: string
@@ -14,7 +14,7 @@ type FormValues = {
 
 export const Authorization = () => {
   const { register, handleSubmit } = useForm<FormValues>()
-
+  const navigate = useNavigate()
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       const response = await authenticateAdmin(data)
@@ -23,7 +23,12 @@ export const Authorization = () => {
         toast.success(response.result || 'Авторизация прошла успешно!', {
           theme: 'dark',
           className: styles['toast'],
+          onClose: () => {
+            navigate('/admin')
+          },
         })
+
+        localStorage.setItem('authToken', JSON.stringify(data))
       } else {
         toast.error(response.error || 'Ошибка авторизации', {
           theme: 'dark',
@@ -37,13 +42,6 @@ export const Authorization = () => {
 
   return (
     <>
-      <header className={styles['header']}>
-        <BrandTitle />
-        <Typography className={styles['subtitle']} as="p" variant="text-light">
-          Администраторская
-        </Typography>
-      </header>
-
       <form
         className={styles['authorization-form']}
         onSubmit={handleSubmit(onSubmit)}
@@ -86,7 +84,7 @@ export const Authorization = () => {
           />
 
           <ToastContainer
-            autoClose={2000}
+            autoClose={1000}
             position="top-center"
             draggable="mouse"
           />

@@ -1,0 +1,28 @@
+.administration {
+  background-image:
+    linear-gradient(#00000080, #00000080),
+    url('../../../shared/assets/administration-background.jpg');
+  background-repeat: no-repeat;
+  min-height: 100%;
+  background-color: #150242;
+
+  background-position: center;
+  background-size: cover;
+}
+
+.wrapper {
+  max-width: 972px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 35px 42px;
+}
+
+.subtitle {
+  color: #ffffff;
+  line-height: 12px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
