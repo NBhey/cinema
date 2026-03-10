@@ -58,3 +58,7 @@
 .authorization-form__btn {
   margin-top: 16px;
 }
+
+.toast {
+  cursor: grab;
+}
