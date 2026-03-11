@@ -6,6 +6,7 @@ import { authenticateAdmin } from '@/shared/api/http'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 type FormValues = {
   login: string
@@ -14,25 +15,36 @@ type FormValues = {
 
 export const Authorization = () => {
   const { register, handleSubmit } = useForm<FormValues>()
+  const [disabled, setDisabled] = useState(false)
   const navigate = useNavigate()
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
+      setDisabled(true)
       const response = await authenticateAdmin(data)
 
       if (response.success) {
-        toast.success(response.result || 'Авторизация прошла успешно!', {
-          theme: 'dark',
-          className: styles['toast'],
-          onClose: () => {
-            navigate('/admin')
+        toast.success(
+          response.result + ' Вы будете перенаправлены на страницу' ||
+            'Авторизация прошла успешно! Вы будете перенаправлены на страницу',
+          {
+            theme: 'dark',
+            className: styles['toast'],
+            onClose: () => {
+              setDisabled(false)
+              navigate('/admin')
+            },
           },
-        })
+        )
 
         localStorage.setItem('authToken', JSON.stringify(data))
       } else {
         toast.error(response.error || 'Ошибка авторизации', {
           theme: 'dark',
           className: styles['toast'],
+          onClose: () => {
+            setDisabled(false)
+          },
         })
       }
     } catch (error) {
@@ -81,6 +93,7 @@ export const Authorization = () => {
             text="Авторизоваться"
             variant="enter"
             type="submit"
+            disabled={disabled}
           />
 
           <ToastContainer

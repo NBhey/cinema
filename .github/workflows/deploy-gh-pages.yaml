@@ -24,6 +24,8 @@ jobs:
         run: npm run build
         env:
           REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
+          AUTH_LOGIN_URL: ${{ secrets.REACT_APP_AUTH_LOGIN_URL }}
+          AUTH_PASSWORD: ${{ secrets.REACT_APP_AUTH_PASSWORD }}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
