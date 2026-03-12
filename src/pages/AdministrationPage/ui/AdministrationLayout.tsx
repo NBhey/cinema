@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import styles from './AdministrationLayout.module.css'
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { BrandTitle } from '@/shared/ui'
 import { Typography } from '@/shared/ui/Typography/Typography'
 
 export const AdministrationLayout = () => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.classList.add(styles['administration'])
     return () => {
       document.documentElement.classList.remove(styles['administration'])
