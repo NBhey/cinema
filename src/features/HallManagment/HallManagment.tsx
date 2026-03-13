@@ -24,8 +24,13 @@ export const HallManagment = () => {
       {isOpenPanel && (
         <div>
           <Typography as="p" variant="text-regular">
-            Доступные залы
+            Доступные залы:
           </Typography>
+          <ul>
+            {data?.result?.halls.map((hall) => {
+              return <li key={hall.id}>{hall.hallName}</li>
+            })}
+          </ul>
         </div>
       )}
     </>
