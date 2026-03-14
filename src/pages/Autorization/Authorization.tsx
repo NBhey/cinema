@@ -4,7 +4,6 @@ import { Button } from '@/shared/ui/Button/Button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { authenticateAdmin } from '@/shared/api/http'
 import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 

@@ -1,0 +1,35 @@
+.bodyPanelWrapper {
+  padding: 36px 31px;
+  background-color: #eae9ebf2;
+
+  transform: translateY(0px);
+  animation: fadeSlideDown 0.4s ease-out forwards;
+}
+
+.bodyPanel {
+  margin: 0 auto;
+  max-width: 791px;
+}
+
+.listHall {
+  margin: 0 auto;
+
+  list-style-type: none;
+}
+
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translateY(-1px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
