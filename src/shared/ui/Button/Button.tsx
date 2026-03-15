@@ -7,6 +7,8 @@ interface ButtonProps {
   className?: string
   style?: CSSProperties
   variant: 'calendar' | 'enter' | 'booking'
+  type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
 }
 
 export const Button = ({
@@ -15,12 +17,16 @@ export const Button = ({
   className = '',
   style = {},
   clickAction,
+  type,
+  disabled,
 }: ButtonProps) => {
   return (
     <button
       onClick={clickAction}
       className={`${styles[variant]} ${className}`}
       style={style}
+      type={type}
+      disabled={disabled}
     >
       {text}
     </button>

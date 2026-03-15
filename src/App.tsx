@@ -9,7 +9,8 @@ import { MainPageLayout } from './pages/MainPage/ui/layout/MainPageLayout'
 import { DateGuard } from './pages/MainPage/ui/layout/DateGuard'
 import { ConfirmStepBtn, ConfirmStepQr } from './features/ConfirmStep/ui'
 import { Authorization } from './pages/Autorization/Authorization'
-import { AdministrationLayout } from './pages/Autorization/ui/AdministrationLayout'
+import { AdministrationLayout } from './pages/AdministrationPage/ui/AdministrationLayout'
+import { Panel } from './pages/AdministrationPage/Panel'
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         </Route>
         <Route element={<AdministrationLayout />}>
           <Route path="/login" element={<Authorization />} />
-          {/* <Route path="/admin" element={} /> */}
+          <Route path="/admin" element={<Panel />} />
         </Route>
       </Routes>
     </Router>

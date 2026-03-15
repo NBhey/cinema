@@ -37,3 +37,13 @@ export type Scheme = {
   result: Array<HallPlaces[]>
   success: boolean
 }
+
+export type AuthResponse =
+  | {
+      result: string
+      success: true
+    }
+  | {
+      error: string
+      success: false
+    }

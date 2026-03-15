@@ -1,6 +1,6 @@
 import { API_CONFIG } from './config'
 import axios, { AxiosInstance } from 'axios'
-import { AllDataFilm, Scheme, Seances } from './type'
+import { AllDataFilm, AuthResponse, Scheme, Seances } from './type'
 import camelcaseKeys from 'camelcase-keys'
 
 const instance: AxiosInstance = axios.create({
@@ -19,7 +19,10 @@ export const api = {
 }
 
 export const getAllData = async () => {
-  return await api.get<AllDataFilm>('alldata')
+  console.log(
+    await api.get<{ success: boolean; result: AllDataFilm }>('alldata'),
+  )
+  return await api.get<{ success: boolean; result: AllDataFilm }>('alldata')
 }
 
 export const getScheme = async (
@@ -40,6 +43,13 @@ export const buyTicket = (parameters: {
     .catch((error) => error)
 
   return ticketResult
+}
+
+export const authenticateAdmin = async (parameters: {
+  login: string
+  password: string
+}): Promise<AuthResponse> => {
+  return await api.post('login', parameters)
 }
 
 // TODO Для админа(пока делаем только пользователя) возможно запросы для админа будут через танстак квери для тренировки
