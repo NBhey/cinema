@@ -7,7 +7,7 @@ import styles from './HallManagment.module.css'
 
 export const HallManagment = () => {
   const [isOpenPanel, setIsOpenPanel] = useState(false)
-  const { data, isLoading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ['halls'],
     queryFn: getAllData,
   })
