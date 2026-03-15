@@ -24,7 +24,7 @@ jobs:
         run: npm run build
         env:
           REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
-          REACT_APP_AUTH_LOGIN: ${{ secrets.REACT_APP_AUTH_LOGIN_URL }}
+          REACT_APP_AUTH_LOGIN: ${{ secrets.REACT_APP_AUTH_LOGIN }}
           REACT_APP_AUTH_PASSWORD: ${{ secrets.REACT_APP_AUTH_PASSWORD }}
 
       - name: Deploy 🚀
