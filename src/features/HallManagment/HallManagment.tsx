@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getAllData } from '@/shared/api/http'
 import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './HallManagment.module.css'
+import bucket from '@/shared/assets/bucket.png'
 
 export const HallManagment = () => {
   const [isOpenPanel, setIsOpenPanel] = useState(false)
@@ -30,7 +31,14 @@ export const HallManagment = () => {
             </Typography>
             <ul className={styles['listHall']}>
               {data?.result?.halls.map((hall) => {
-                return <li key={hall.id}>- {hall.hallName}</li>
+                return (
+                  <li key={hall.id} className={styles['itemHall']}>
+                    - {hall.hallName}{' '}
+                    <button>
+                      <img src={bucket} width={12} alt="корзина" />
+                    </button>
+                  </li>
+                )
               })}
             </ul>
           </div>

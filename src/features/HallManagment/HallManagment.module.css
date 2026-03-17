@@ -9,12 +9,39 @@
 .bodyPanel {
   margin: 0 auto;
   max-width: 791px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
 }
 
 .listHall {
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   list-style-type: none;
+}
+
+.itemHall {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.itemHall button {
+  display: inline-block;
+  max-width: 20px;
+  width: 100%;
+  height: 20px;
+  text-align: center;
+
+  border-radius: 3px;
+  border: none;
+  background-color: white;
+
+  box-shadow: 0px 3px 3px 0px #0000003d;
 }
 
 @keyframes fadeSlideDown {
