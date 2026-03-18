@@ -5,6 +5,8 @@ import { getAllData } from '@/shared/api/http'
 import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './HallManagment.module.css'
 import bucket from '@/shared/assets/bucket.png'
+import useDeleteHall from '@/entities/hall/useDeleteHall'
+import { Button } from '@/shared/ui/Button/Button'
 
 export const HallManagment = () => {
   const [isOpenPanel, setIsOpenPanel] = useState(false)
@@ -16,6 +18,9 @@ export const HallManagment = () => {
   const handleTogglePanel = () => {
     setIsOpenPanel(!isOpenPanel)
   }
+
+  const { mutate: deleteHall } = useDeleteHall()
+
   return (
     <>
       <PanelHeader
@@ -34,13 +39,20 @@ export const HallManagment = () => {
                 return (
                   <li key={hall.id} className={styles['itemHall']}>
                     - {hall.hallName}{' '}
-                    <button>
+                    <button
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        deleteHall(hall.id)
+                      }}
+                    >
                       <img src={bucket} width={12} alt="корзина" />
                     </button>
                   </li>
                 )
               })}
             </ul>
+
+            <Button text="Создать зал" variant="standart" />
           </div>
         </section>
       )}

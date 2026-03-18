@@ -16,12 +16,10 @@ export const api = {
   get: <T>(url: string, config?: any) => instance.get<any, T>(url, config),
   post: <T>(url: string, body?: any, config?: any) =>
     instance.post<any, T>(url, body, config),
+  delete: (url: string) => instance.delete(url),
 }
 
 export const getAllData = async () => {
-  console.log(
-    await api.get<{ success: boolean; result: AllDataFilm }>('alldata'),
-  )
   return await api.get<{ success: boolean; result: AllDataFilm }>('alldata')
 }
 
@@ -53,3 +51,11 @@ export const authenticateAdmin = async (parameters: {
 }
 
 // TODO Для админа(пока делаем только пользователя) возможно запросы для админа будут через танстак квери для тренировки
+
+export const deleteHall = async (hallId: number) => {
+  return await api.delete(`hall/${hallId}`)
+}
+
+export const createHall = async (parameters: { hallName: string }) => {
+  return await api.post('hall', parameters)
+}
