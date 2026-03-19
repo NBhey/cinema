@@ -7,7 +7,6 @@ import styles from './HallManagment.module.css'
 import bucket from '@/shared/assets/bucket.png'
 import useDeleteHall from '@/entities/hall/useDeleteHall'
 import { Button } from '@/shared/ui/Button/Button'
-import { Dialog } from 'radix-ui'
 
 export const HallManagment = () => {
   const [isOpenPanel, setIsOpenPanel] = useState(false)
@@ -21,7 +20,7 @@ export const HallManagment = () => {
   }
 
   const { mutate: deleteHall } = useDeleteHall()
-  console.log(Dialog)
+
   return (
     <>
       <PanelHeader
@@ -59,24 +58,8 @@ export const HallManagment = () => {
               variant="standart"
             />
           </div>
-
-          <Modal />
         </section>
       )}
     </>
   )
 }
-
-const Modal = ({
-  isOpen,
-  isModal,
-  className,
-  title,
-  classNameTitle,
-  children,
-}) => (
-  <Dialog.Root open={isOpen} modal={isModal} className={className}>
-    <Dialog.Title className={classNameTitle}>{title}</Dialog.Title>
-    <Dialog.Content>{children}</Dialog.Content>
-  </Dialog.Root>
-)
