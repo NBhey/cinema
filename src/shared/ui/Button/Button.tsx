@@ -6,7 +6,7 @@ interface ButtonProps {
   clickAction?: () => void
   className?: string
   style?: CSSProperties
-  variant: 'calendar' | 'enter' | 'booking'
+  variant: 'calendar' | 'enter' | 'standart' | 'booking'
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
 }

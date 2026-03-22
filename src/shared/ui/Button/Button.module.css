@@ -32,9 +32,7 @@
   background-color: azure;
 }
 
-.booking {
-  margin: 0 auto;
-  display: block;
+.standart {
   background-color: #16a6af;
   border: none;
   text-align: center;
@@ -48,7 +46,7 @@
   text-transform: uppercase;
 }
 
-.booking:hover {
+.standart:hover {
   background-color: azure;
   color: black;
 }

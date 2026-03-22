@@ -7,9 +7,12 @@ import styles from './HallManagment.module.css'
 import bucket from '@/shared/assets/bucket.png'
 import useDeleteHall from '@/entities/hall/useDeleteHall'
 import { Button } from '@/shared/ui/Button/Button'
+import { Modal } from '@/shared/ui/Modal/Modal'
 
 export const HallManagment = () => {
   const [isOpenPanel, setIsOpenPanel] = useState(false)
+  const [isOpenModalBooking, setIsOpenModalBooking] = useState(false)
+
   const { data } = useQuery({
     queryKey: ['halls'],
     queryFn: getAllData,
@@ -56,7 +59,17 @@ export const HallManagment = () => {
               className={styles['btn-createHall']}
               text="Создать зал"
               variant="standart"
+              clickAction={() => {
+                setIsOpenModalBooking(!isOpenModalBooking)
+              }}
             />
+
+            <Modal isModal isOpen={isOpenModalBooking} title="Добавление зала">
+              <>
+                <p></p>
+                <input type="text" name="" id="" />
+              </>
+            </Modal>
           </div>
         </section>
       )}

@@ -6,10 +6,10 @@ const queryClient = new QueryClient()
 
 export const Panel = () => {
   return (
-    <AuthGuard>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <AuthGuard>
         <HallManagment />
-      </QueryClientProvider>
-    </AuthGuard>
+      </AuthGuard>
+    </QueryClientProvider>
   )
 }

@@ -206,7 +206,7 @@ export const SelectSeatsStep = () => {
         <Button
           clickAction={handleBooking}
           text="Забронировать"
-          variant="booking"
+          variant="standart"
         />
       </div>
     </section>

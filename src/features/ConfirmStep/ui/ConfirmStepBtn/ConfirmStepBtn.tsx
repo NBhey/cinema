@@ -14,7 +14,7 @@ export const ConfirmStepBtn = () => {
       <Button
         style={{ maxWidth: 337, width: '100%', marginBottom: '9px' }}
         text="Получить код бронирования"
-        variant="booking"
+        variant="standart"
         clickAction={handleBookingClick}
       />
 
