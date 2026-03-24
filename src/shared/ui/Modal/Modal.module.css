@@ -26,12 +26,20 @@
 
 .title {
   padding: 16px 42px 14px;
-
+  display: flex;
+  justify-content: space-between;
   background-color: #63536c;
 }
 
 .btn-close {
   all: unset;
+  cursor: pointer;
+
+  transition: transform 0.2s;
+}
+
+.btn-close:hover {
+  transform: scale(1.1);
 }
 
 .scr-only {
@@ -45,13 +53,20 @@
   white-space: nowrap;
   border-width: 0;
 }
+
+.body {
+  padding: 16px 10px 35px;
+  display: flex;
+  flex-direction: column;
+
+  background-color: #eae9ebf2;
+}
+
 @keyframes contentShow {
   from {
-    opacity: 0;
-    transform: translate(-50%, -48%) scale(0.96);
+    transform: translate(-50%, -48%) scale(0);
   }
   to {
-    opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
 }

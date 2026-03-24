@@ -1,7 +1,6 @@
-import { ReactElement, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { PanelHeader } from '@/shared/ui/PanelHeader/PanelHeader'
-import { useQuery } from '@tanstack/react-query'
-import { getAllData } from '@/shared/api/http'
+
 import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './HallManagment.module.css'
 import bucket from '@/shared/assets/bucket.png'
@@ -9,17 +8,14 @@ import { useDeleteHall } from '@/entities/hall/useDeleteHall'
 import { Button } from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { useCreateHall } from '@/entities/hall/useCreateHall'
+import { useHallsQuery } from '@/shared/api/hall/quieries'
 
 export const HallManagment = () => {
   const [isOpenPanel, setIsOpenPanel] = useState(false)
   const [isOpenModalBooking, setIsOpenModalBooking] = useState(false)
   const inputValue = useRef<HTMLInputElement>(null)
 
-  //TODO вынести это из функции, здесь этого не должно быть
-  const { data } = useQuery({
-    queryKey: ['halls'],
-    queryFn: getAllData,
-  })
+  const { data } = useHallsQuery()
   const { mutate: deleteHall } = useDeleteHall()
   const { mutate: createHall } = useCreateHall()
 
@@ -76,9 +72,10 @@ export const HallManagment = () => {
               title="Добавление зала"
               onClose={handleCloseModal}
               classNameBody={styles['content']}
+              describeContent="modal-hall-add"
             >
               <>
-                <div>
+                <div id="modal-hall-add">
                   <Typography
                     as={'p'}
                     variant="text-light"

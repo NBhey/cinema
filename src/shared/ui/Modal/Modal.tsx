@@ -11,6 +11,9 @@ interface ModalProps {
   title: string
   classNameTitle?: string
   children: ReactElement
+  classNameBody?: string
+  onClose: () => void
+  describeContent?: string
 }
 
 export const Modal: FC<ModalProps> = ({
@@ -19,23 +22,33 @@ export const Modal: FC<ModalProps> = ({
   className,
   title,
   classNameTitle,
+  classNameBody,
   children,
+  onClose,
+  describeContent,
 }) => (
   <Dialog.Root open={isOpen} modal={isModal}>
     <Dialog.Portal>
-      <Dialog.Overlay className={styles['overlay']} />
-      <Dialog.Content className={clsx(styles['content'], className)}>
+      <Dialog.Overlay
+        aria-describedby={describeContent}
+        className={styles['overlay']}
+      />
+      <Dialog.Content
+        aria-describedby={describeContent}
+        className={clsx(styles['content'], className)}
+      >
         <Dialog.Title className={clsx(styles['title'], classNameTitle)}>
           {title}
-        </Dialog.Title>
-        {children}
 
-        <Dialog.Close asChild>
-          <button className={styles['btn-close']}>
-            <img src={closeBtn} width={22} alt="close" />
-            <span className={styles['scr-only']}> Закрыть </span>
-          </button>
-        </Dialog.Close>
+          <Dialog.Close asChild>
+            <button className={styles['btn-close']} onClick={onClose}>
+              <img src={closeBtn} width={22} alt="close" />
+              <span className={styles['scr-only']}> Закрыть </span>
+            </button>
+          </Dialog.Close>
+        </Dialog.Title>
+
+        <div className={clsx(styles['body'], classNameBody)}>{children}</div>
       </Dialog.Content>
     </Dialog.Portal>
   </Dialog.Root>
