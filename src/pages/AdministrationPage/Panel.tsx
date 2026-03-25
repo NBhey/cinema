@@ -1,4 +1,5 @@
 import { AuthGuard } from '@/features/AuthGuard/AuthGuard'
+import { ConfigurateHall } from '@/features/ConfigurateHall/ConfigurateHall'
 import { HallManagment } from '@/features/HallManagment/HallManagment'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -9,6 +10,7 @@ export const Panel = () => {
     <QueryClientProvider client={queryClient}>
       <AuthGuard>
         <HallManagment />
+        <ConfigurateHall />
       </AuthGuard>
     </QueryClientProvider>
   )
