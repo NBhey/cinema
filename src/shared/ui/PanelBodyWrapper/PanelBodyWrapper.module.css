@@ -1,0 +1,7 @@
+.bodyPanelWrapper {
+  padding: 36px 31px;
+  background-color: #eae9ebf2;
+
+  transform: translateY(0px);
+  animation: fadeSlideDown 0.4s ease-out forwards;
+}
