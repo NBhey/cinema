@@ -1,7 +1,7 @@
 import { deleteHall } from '@/shared/api/http'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-export default function useDeleteHall() {
+export const useDeleteHall = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
