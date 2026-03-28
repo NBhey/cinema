@@ -1,0 +1,16 @@
+.title {
+  font-weight: normal;
+}
+
+.inputConfigurate::-webkit-outer-spin-button,
+.inputConfigurate::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputConfigurate[type='number'],
+.inputConfigurate[type='number']:hover,
+.inputConfigurate[type='number']:focus {
+  appearance: none;
+  -moz-appearance: textfield;
+}
