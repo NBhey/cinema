@@ -25,6 +25,13 @@ export const ConfigurateRowAndPlace = ({
             placeholder={String(row)}
             max="10"
             min="1"
+            onChange={(e) => {
+              const inputNumber = Number(e.target.value)
+              console.log(e.target.value)
+              if (inputNumber > 10 || inputNumber < 1) {
+                return
+              }
+            }}
           />
         </div>
 

@@ -1,6 +1,4 @@
 import { useRef, useState } from 'react'
-import { PanelHeader } from '@/shared/ui/PanelHeader/PanelHeader'
-
 import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './HallManagment.module.css'
 import bucket from '@/shared/assets/bucket.png'
@@ -9,31 +7,26 @@ import { Button } from '@/shared/ui/Button/Button'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { useCreateHall } from '@/entities/hall/useCreateHall'
 import { useHallsQuery } from '@/shared/api/hall/quieries'
+import useAdminPanelHeader from '../admin/lib/useAdminPanelHeader'
+import { PanelBodyWrapper } from '@/shared/ui'
 
 export const HallManagment = () => {
-  const [isOpenPanel, setIsOpenPanel] = useState(false)
   const [isOpenModalBooking, setIsOpenModalBooking] = useState(false)
   const inputValue = useRef<HTMLInputElement>(null)
+
+  const { isPanelOpen, Header } = useAdminPanelHeader('Управление залами')
 
   const { data } = useHallsQuery()
   const { mutate: deleteHall } = useDeleteHall()
   const { mutate: createHall } = useCreateHall()
 
-  const handleTogglePanel = () => {
-    setIsOpenPanel(!isOpenPanel)
-  }
-
   const handleCloseModal = () => setIsOpenModalBooking(false)
   return (
     <>
-      <PanelHeader
-        title="Управление залами"
-        handleOpenPanel={handleTogglePanel}
-        isOpenPanel={isOpenPanel}
-      />
+      <Header />
 
-      {isOpenPanel && (
-        <section className={styles['bodyPanelWrapper']}>
+      {isPanelOpen && (
+        <PanelBodyWrapper>
           <div className={styles['bodyPanel']}>
             <Typography as="p" variant="text-regular">
               Доступные залы:
@@ -103,7 +96,7 @@ export const HallManagment = () => {
                       createHall(inputValue.current.value)
                       handleCloseModal()
                     }}
-                    text="Добавить фильм"
+                    text="Добавить зал"
                     variant="standart"
                   ></Button>
                   <Button
@@ -115,7 +108,7 @@ export const HallManagment = () => {
               </>
             </Modal>
           </div>
-        </section>
+        </PanelBodyWrapper>
       )}
     </>
   )

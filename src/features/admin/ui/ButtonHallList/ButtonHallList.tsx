@@ -17,7 +17,7 @@ export const ButtonHallList = ({
         Выберите зал для конфигурации:
       </Typography>
 
-      <div>
+      <ul>
         {halls?.map((hall) => {
           return (
             <Button
@@ -31,7 +31,7 @@ export const ButtonHallList = ({
             />
           )
         })}
-      </div>
+      </ul>
     </div>
   )
 }
