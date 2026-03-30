@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Hall } from '@/shared/api/type'
 import { ButtonHallList } from '../admin/ui/ButtonHallList/ButtonHallList'
 import { ConfigurateRowAndPlace } from '../admin/ui/ConfigurateRowAndPlace/ConfigurateRowAndPlace'
+import { ConfigurateHallScheme } from '../admin/ui/ConfigurateHallScheme/ConfigurateHallScheme'
 
 export const ConfigurateHall = () => {
   const [activeHallId, setActiveHallId] = useState<Hall | null>(null)
@@ -19,6 +20,15 @@ export const ConfigurateHall = () => {
     }
   }, [halls])
 
+  const hanfleChangeRow = (value: number) => {
+    if (activeHallId) {
+      setActiveHallId({
+        ...activeHallId,
+        hallRows: value,
+      })
+    }
+  }
+
   console.log(activeHallId)
   return (
     <>
@@ -29,7 +39,10 @@ export const ConfigurateHall = () => {
           <ConfigurateRowAndPlace
             row={activeHallId?.hallRows}
             places={activeHallId?.hallPlaces}
+            onChangeRow={hanfleChangeRow}
+            // onChangePlace={() => {}}
           />
+          <ConfigurateHallScheme scheme={activeHallId?.hallConfig} />
         </PanelBodyWrapper>
       )}
     </>

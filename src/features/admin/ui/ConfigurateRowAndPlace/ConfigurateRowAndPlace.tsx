@@ -1,53 +1,71 @@
 import { Typography } from '@/shared/ui/Typography/Typography'
 import styles from './ConfigurateRowAndPlace.module.css'
+import { useForm } from 'react-hook-form'
 
 export const ConfigurateRowAndPlace = ({
   row,
   places,
+  onChangeRow,
+  onChangePlaces,
 }: {
   row?: number
   places?: number
+  onChangeRow: (value: number) => void
+  onChangePlaces?: (value: number) => void
 }) => {
+  const { register, handleSubmit } = useForm()
+
   return (
     <>
       <Typography as="h5" variant="heading-sm" className={styles['title']}>
         Укажите количество рядов и максимальное количество кресел в ряду:
       </Typography>
 
-      <div>
+      <form>
         <div>
-          <label htmlFor="row"></label>
+          <label htmlFor="row"> Рядов, шт</label>
           <input
-            className={styles['inputConfigurate']}
             id="row"
-            name="row"
+            className={styles['inputConfigurate']}
+            {...register('row', {
+              required: 'Поле обязательно для заполнения',
+              min: 1,
+              max: 10,
+            })}
             type="number"
+            max={10}
+            min={1}
             placeholder={String(row)}
-            max="10"
-            min="1"
             onChange={(e) => {
-              const inputNumber = Number(e.target.value)
-              console.log(e.target.value)
-              if (inputNumber > 10 || inputNumber < 1) {
+              if (Number(e.target.value) > 10) {
                 return
               }
+              onChangeRow(Number(e.target.value))
             }}
           />
         </div>
 
         <div>
-          <label htmlFor="places"></label>
+          <label htmlFor="places">Мест, шт</label>
           <input
             className={styles['inputConfigurate']}
             id="places"
-            name="places"
             type="number"
             placeholder={String(places)}
-            max="10"
-            min="1"
+            {...register('places', {
+              required: 'Поле обязательно для заполнения',
+              min: 1,
+              max: 20,
+            })}
+            onChange={(e) => {
+              if (Number(e.target.value) > 10) {
+                return
+              }
+              // onChangePlaces(Number(e.target.value))
+            }}
           />
         </div>
-      </div>
+      </form>
     </>
   )
 }
