@@ -16,19 +16,24 @@ export const ConfigurateRowAndPlace = ({
   const { register, handleSubmit } = useForm()
 
   return (
-    <>
+    <div>
       <Typography as="h5" variant="heading-sm" className={styles['title']}>
         Укажите количество рядов и максимальное количество кресел в ряду:
       </Typography>
 
-      <form>
-        <div>
-          <label htmlFor="row"> Рядов, шт</label>
+      <form className={styles['formWrapper']}>
+        <div className={styles['inputWrapper']}>
+          <label htmlFor="row">
+            <Typography as="span" variant="text-light">
+              Рядов, шт
+            </Typography>{' '}
+          </label>
           <input
             id="row"
             className={styles['inputConfigurate']}
             {...register('row', {
               required: 'Поле обязательно для заполнения',
+              valueAsNumber: true,
               min: 1,
               max: 10,
             })}
@@ -42,11 +47,17 @@ export const ConfigurateRowAndPlace = ({
               }
               onChangeRow(Number(e.target.value))
             }}
+            onKeyDown={(e) => e.preventDefault()}
           />
         </div>
-
-        <div>
-          <label htmlFor="places">Мест, шт</label>
+        <span>x</span>
+        <div className={styles['inputWrapper']}>
+          <label htmlFor="places">
+            {' '}
+            <Typography as="span" variant="text-light">
+              Мест, шт{' '}
+            </Typography>{' '}
+          </label>
           <input
             className={styles['inputConfigurate']}
             id="places"
@@ -54,8 +65,9 @@ export const ConfigurateRowAndPlace = ({
             placeholder={String(places)}
             {...register('places', {
               required: 'Поле обязательно для заполнения',
+              valueAsNumber: true,
               min: 1,
-              max: 20,
+              max: 10,
             })}
             onChange={(e) => {
               if (Number(e.target.value) > 10) {
@@ -66,6 +78,6 @@ export const ConfigurateRowAndPlace = ({
           />
         </div>
       </form>
-    </>
+    </div>
   )
 }

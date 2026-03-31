@@ -1,3 +1,31 @@
 .title {
   font-weight: normal;
 }
+
+.formWrapper {
+  display: flex;
+  align-content: baseline;
+
+  gap: 5px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.formWrapper > span {
+  align-self: center;
+  color: #848484;
+}
+
+.inputWrapper > label {
+  color: #848484;
+}
+
+.inputWrapper > input {
+  width: 100px;
+  height: 36px;
+}
