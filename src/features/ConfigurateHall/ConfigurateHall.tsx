@@ -8,7 +8,7 @@ import { ConfigurateRowAndPlace } from '../admin/ui/ConfigurateRowAndPlace/Confi
 import { ConfigurateHallScheme } from '../admin/ui/ConfigurateHallScheme/ConfigurateHallScheme'
 
 export const ConfigurateHall = () => {
-  const [activeHallId, setActiveHallId] = useState<Hall | null>(null)
+  const [activeHall, setActiveHall] = useState<Hall | null>(null)
 
   const { isPanelOpen, Header } = useAdminPanelHeader('Конфигурация залов')
   const { data } = useHallsQuery()
@@ -16,33 +16,36 @@ export const ConfigurateHall = () => {
 
   useEffect(() => {
     if (halls) {
-      setActiveHallId(halls[0])
+      setActiveHall(halls[0])
     }
   }, [halls])
 
   const hanfleChangeRow = (value: number) => {
-    if (activeHallId) {
-      setActiveHallId({
-        ...activeHallId,
+    if (activeHall) {
+      setActiveHall({
+        ...activeHall,
         hallRows: value,
       })
     }
   }
 
-  console.log(activeHallId)
   return (
     <>
       <Header />
       {isPanelOpen && (
         <PanelBodyWrapper>
-          <ButtonHallList halls={halls} changeHall={setActiveHallId} />
+          <ButtonHallList halls={halls} changeHall={setActiveHall} />
           <ConfigurateRowAndPlace
-            row={activeHallId?.hallRows}
-            places={activeHallId?.hallPlaces}
+            row={activeHall?.hallRows}
+            places={activeHall?.hallPlaces}
             onChangeRow={hanfleChangeRow}
             // onChangePlace={() => {}}
           />
-          <ConfigurateHallScheme scheme={activeHallId?.hallConfig} />
+          <ConfigurateHallScheme
+            row={activeHall?.hallRows}
+            places={activeHall?.hallPlaces}
+            scheme={activeHall?.hallConfig}
+          />
         </PanelBodyWrapper>
       )}
     </>

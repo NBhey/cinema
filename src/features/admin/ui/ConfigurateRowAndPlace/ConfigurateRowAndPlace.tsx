@@ -40,6 +40,7 @@ export const ConfigurateRowAndPlace = ({
             type="number"
             max={10}
             min={1}
+            value={row}
             placeholder={String(row)}
             onChange={(e) => {
               if (Number(e.target.value) > 10) {
