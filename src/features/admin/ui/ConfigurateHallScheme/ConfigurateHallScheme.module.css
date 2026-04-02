@@ -1,0 +1,11 @@
+.wrapperContent {
+  display: flex;
+  flex-direction: column;
+  max-height: 333px;
+  height: 100vh;
+
+  align-items: center;
+  border: 1px solid #000000;
+
+  gap: 12px;
+}

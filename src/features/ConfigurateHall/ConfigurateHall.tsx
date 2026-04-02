@@ -6,6 +6,7 @@ import { Hall } from '@/shared/api/type'
 import { ButtonHallList } from '../admin/ui/ButtonHallList/ButtonHallList'
 import { ConfigurateRowAndPlace } from '../admin/ui/ConfigurateRowAndPlace/ConfigurateRowAndPlace'
 import { ConfigurateHallScheme } from '../admin/ui/ConfigurateHallScheme/ConfigurateHallScheme'
+import { Button } from '@/shared/ui/Button/Button'
 
 export const ConfigurateHall = () => {
   const [activeHall, setActiveHall] = useState<Hall | null>(null)
@@ -20,12 +21,27 @@ export const ConfigurateHall = () => {
     }
   }, [halls])
 
-  const hanfleChangeRow = (value: number) => {
+  const handleChangeRow = (value: number) => {
     if (activeHall) {
       setActiveHall({
         ...activeHall,
         hallRows: value,
       })
+    }
+  }
+
+  const handleChangePlace = (value: number) => {
+    if (activeHall) {
+      setActiveHall({ ...activeHall, hallPlaces: value })
+    }
+  }
+
+  const handleCancelAllChange = () => {
+    console.log(activeHall)
+    if (halls) {
+      setActiveHall(
+        halls.find((hall) => hall.id === activeHall?.id) || halls[0],
+      )
     }
   }
 
@@ -35,16 +51,24 @@ export const ConfigurateHall = () => {
       {isPanelOpen && (
         <PanelBodyWrapper>
           <ButtonHallList halls={halls} changeHall={setActiveHall} />
+
           <ConfigurateRowAndPlace
             row={activeHall?.hallRows}
             places={activeHall?.hallPlaces}
-            onChangeRow={hanfleChangeRow}
-            // onChangePlace={() => {}}
+            onChangeRow={handleChangeRow}
+            onChangePlaces={handleChangePlace}
           />
+
           <ConfigurateHallScheme
             row={activeHall?.hallRows}
             places={activeHall?.hallPlaces}
             scheme={activeHall?.hallConfig}
+          />
+
+          <Button
+            clickAction={handleCancelAllChange}
+            text="Отменить"
+            variant="standart"
           />
         </PanelBodyWrapper>
       )}
