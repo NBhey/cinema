@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] },
-    "target": "es5",
+    "paths": { "@/*": ["./src/*"] },
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext","ES2023.Array", "DOM", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -11,8 +10,8 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "node16",
+    "moduleResolution": "node16",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
