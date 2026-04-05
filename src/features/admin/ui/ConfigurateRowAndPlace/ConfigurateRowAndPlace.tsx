@@ -11,12 +11,12 @@ export const ConfigurateRowAndPlace = ({
   row?: number
   places?: number
   onChangeRow: (value: number) => void
-  onChangePlaces?: (value: number) => void
+  onChangePlaces: (value: number) => void
 }) => {
-  const { register, handleSubmit } = useForm()
+  const { register } = useForm()
 
   return (
-    <div>
+    <div className={styles['wrapperContent']}>
       <Typography as="h5" variant="heading-sm" className={styles['title']}>
         Укажите количество рядов и максимальное количество кресел в ряду:
       </Typography>
@@ -62,8 +62,11 @@ export const ConfigurateRowAndPlace = ({
           <input
             className={styles['inputConfigurate']}
             id="places"
+            value={places}
             type="number"
             placeholder={String(places)}
+            max={10}
+            min={1}
             {...register('places', {
               required: 'Поле обязательно для заполнения',
               valueAsNumber: true,
@@ -71,11 +74,9 @@ export const ConfigurateRowAndPlace = ({
               max: 10,
             })}
             onChange={(e) => {
-              if (Number(e.target.value) > 10) {
-                return
-              }
-              // onChangePlaces(Number(e.target.value))
+              onChangePlaces(Number(e.target.value))
             }}
+            onKeyDown={(e) => e.preventDefault()}
           />
         </div>
       </form>

@@ -1,3 +1,4 @@
+import { GridSession } from '@/features/admin/ui/GridSession/GridSession'
 import { AuthGuard } from '@/features/AuthGuard/AuthGuard'
 import { ConfigurateHall } from '@/features/ConfigurateHall/ConfigurateHall'
 import { HallManagment } from '@/features/HallManagment/HallManagment'
@@ -11,6 +12,7 @@ export const Panel = () => {
       <AuthGuard>
         <HallManagment />
         <ConfigurateHall />
+        <GridSession />
       </AuthGuard>
     </QueryClientProvider>
   )
