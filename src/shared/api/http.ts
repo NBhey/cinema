@@ -59,3 +59,7 @@ export const deleteHall = async (hallId: number) => {
 export const createHall = async (parameters: { hallName: string }) => {
   return await api.post('hall', parameters)
 }
+
+export const deleteFilm = async (filmId: number | string) => {
+  return api.delete(`film/${filmId}`)
+}
