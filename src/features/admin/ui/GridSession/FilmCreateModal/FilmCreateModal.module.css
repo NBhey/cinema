@@ -1,0 +1,34 @@
+.formWrapper {
+  margin: 0 auto;
+  max-width: 752px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+}
+
+.label {
+  max-width: 752px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.textField {
+  color: #848484;
+}
+
+.inputField {
+  padding: 8px;
+  border: 1px solid #b7b7b7;
+}
+
+.inputField::placeholder {
+  font-family: var(--font-main);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-16);
+  line-height: var(--lh-18);
+}
