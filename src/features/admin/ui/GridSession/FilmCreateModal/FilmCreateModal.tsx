@@ -1,6 +1,7 @@
 import { Modal } from '@/shared/ui/Modal/Modal'
 import styles from './FilmCreateModal.module.css'
 import { Typography } from '@/shared/ui/Typography/Typography'
+import { useState } from 'react'
 
 export const FilmCreateModal = ({
   isOpenModal,
@@ -9,12 +10,15 @@ export const FilmCreateModal = ({
   isOpenModal: boolean
   onClose: () => void
 }) => {
+  const [image, setImage] = useState<string | null>(null)
+
   return (
     <Modal
       isOpen={isOpenModal}
       title="Добавление фильма"
       onClose={onClose}
       isModal
+      classNameBody={styles['modalWrapper']}
     >
       <form action="" className={styles['formWrapper']}>
         <label htmlFor="filmName" className={styles['label']}>
@@ -60,7 +64,11 @@ export const FilmCreateModal = ({
             Описание фильма
           </Typography>
 
-          <textarea id="filmDescription" name="filmDescription" />
+          <textarea
+            id="filmDescription"
+            name="filmDescription"
+            className={styles['inputTextarea']}
+          />
         </label>
 
         <label htmlFor="filmCountry" className={styles['label']}>
@@ -81,27 +89,25 @@ export const FilmCreateModal = ({
         </label>
 
         <label htmlFor="file">
+          <div className={styles['downloadImgBtn']}>Загрузить постер</div>
           <input
             type="file"
             name="file"
             id="file"
             onChange={(e) => {
+              if (!e.target.files) {
+                return
+              }
               console.log(e.target.files)
+              const imageObjectUrl = URL.createObjectURL(e.target.files[0])
+              console.log(imageObjectUrl)
+              setImage(imageObjectUrl)
             }}
-            style={{
-              position: 'absolute',
-              width: '1px',
-              height: '1px',
-              padding: 0,
-              margin: '-1px',
-              overflow: 'hidden',
-              clipPath: ' inset(50%)',
-              whiteSpace: 'nowrap',
-              borderWidth: 0,
-            }}
+            className={styles['downloadImgInput']}
           />
         </label>
       </form>
+      {image && <img src={image} alt="poster" width={125} height={175} />}
     </Modal>
   )
 }
