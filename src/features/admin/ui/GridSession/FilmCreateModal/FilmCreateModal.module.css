@@ -1,16 +1,16 @@
+.modalWrapper {
+  align-items: center;
+}
 .formWrapper {
-  margin: 0 auto;
   max-width: 752px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  align-content: center;
+
   gap: 8px;
 }
 
 .label {
-  max-width: 752px;
-
   display: flex;
   flex-direction: column;
 
@@ -31,4 +31,39 @@
   font-weight: var(--fw-regular);
   font-size: var(--fs-16);
   line-height: var(--lh-18);
+}
+
+.inputTextarea {
+  resize: none;
+  min-height: 80px;
+}
+
+.downloadImgInput[type='file'] {
+  display: none;
+}
+
+.downloadImgBtn {
+  max-width: 200px;
+  background-color: #16a6af;
+  border: none;
+  text-align: center;
+  padding: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  box-shadow:
+    0 3px 3px #0000003d,
+    0 0 3px #0000001f;
+  text-transform: uppercase;
+}
+
+.downloadImgBtn:hover {
+  background-color: azure;
+  color: black;
+}
+
+.btnPanelWrapper {
+  display: flex;
+  gap: 8px;
+  align-self: center;
 }
