@@ -63,3 +63,20 @@ export const createHall = async (parameters: { hallName: string }) => {
 export const deleteFilm = async (filmId: number | string) => {
   return api.delete(`film/${filmId}`)
 }
+
+export const addFilm = async (parameters: {
+  filmName: string
+  filmDuration: number
+  filmDescription: string
+  filmOrigin: string
+  filePoster: FileList
+}) => {
+  const data = new FormData()
+  data.append('filmName', parameters.filmName)
+  data.append('filmDuration', parameters.filmDuration.toString())
+  data.append('filmDescription', parameters.filmDescription)
+  data.append('filmOrigin', parameters.filmOrigin)
+  data.append('filePoster', parameters.filePoster[0])
+
+  return await api.post('film', data)
+}
