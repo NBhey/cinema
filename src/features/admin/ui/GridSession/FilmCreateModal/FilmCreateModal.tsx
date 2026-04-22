@@ -39,6 +39,7 @@ export const FilmCreateModal = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FilmFormValues>()
 
   const filmPosterRegister = register('filePoster', {
@@ -49,12 +50,18 @@ export const FilmCreateModal = ({
     <Modal
       isOpen={isOpenModal}
       title="Добавление фильма"
-      onClose={onClose}
+      onClose={() => {
+        onClose()
+        reset()
+      }}
       isModal
       classNameBody={styles['modalWrapper']}
     >
       <form
-        onSubmit={handleSubmit((data) => addFilm(data))}
+        onSubmit={handleSubmit((data) => {
+          addFilm(data)
+          onClose()
+        })}
         className={styles['formWrapper']}
       >
         <label htmlFor="filmName" className={styles['label']}>
@@ -84,7 +91,6 @@ export const FilmCreateModal = ({
           <input
             {...register('filmDuration', {
               required: 'Укажите длительность',
-              valueAsNumber: true,
             })}
             className={styles['inputField']}
           />
@@ -169,7 +175,10 @@ export const FilmCreateModal = ({
           </label>
 
           <Button
-            clickAction={onClose}
+            clickAction={() => {
+              onClose()
+              reset()
+            }}
             text="Отменить"
             variant="standart"
           ></Button>

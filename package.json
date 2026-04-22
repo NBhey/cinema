@@ -5,6 +5,8 @@
   "homepage": ".",
   "dependencies": {
     "@craco/craco": "^7.1.0",
+    "@dnd-kit/react": "^0.4.0",
+    "@hookform/error-message": "^2.0.1",
     "@tanstack/react-query": "^5.90.21",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",

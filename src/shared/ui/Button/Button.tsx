@@ -3,7 +3,7 @@ import { CSSProperties } from 'react'
 
 interface ButtonProps {
   text: string
-  clickAction?: () => void
+  clickAction?: (e: any) => void
   className?: string
   style?: CSSProperties
   variant: 'calendar' | 'enter' | 'standart' | 'booking'
