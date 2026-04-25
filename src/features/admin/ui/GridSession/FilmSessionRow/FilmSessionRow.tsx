@@ -1,4 +1,8 @@
 import { AllDataFilm } from '@/shared/api/type'
+import styles from './FilmSessionRow.module.css'
+
+const MINUTE_IN_DAY = 1440
+const WIDTH = '100%'
 
 export const FilmSessionRow = ({
   data,
@@ -11,24 +15,36 @@ export const FilmSessionRow = ({
     return {
       id: hall.id,
       hallName: hall.hallName,
+      seance: result.seances.filter((seance) => {
+        return seance.seanceHallid === hall.id
+      }),
     }
   })
 
-  const list = result?.films.map((film) => {
-    if (result) {
-      const seances = result.seances.filter((seance) => {
-        return film.id === seance.seanceFilmid
-      })
-      const halls = result.halls.filter((hall) => {
-        return seances.some((seance) => hall.id === seance.seanceHallid)
-      })
+  return (
+    <ul>
+      {halls.map((hall) => {
+        return (
+          <li className={styles['hallItem']} key={hall.id}>
+            <p>{hall.hallName}</p>
+            <div className={styles['row']}>
+              {hall.seance.map((seance) => {
+                const film = result.films.find(
+                  (film) => seance.seanceFilmid === film?.id,
+                )
 
-      const sharedProps = { ...film, seances, halls }
-      return sharedProps
-    }
-    return null
-  })
-
-  console.log(list)
-  return <div></div>
+                const filmInfo = { ...seance, ...film }
+                return (
+                  <>
+                    <span>{filmInfo.filmName}</span>
+                    <span>{filmInfo.seanceTime}</span>
+                  </>
+                )
+              })}
+            </div>
+          </li>
+        )
+      })}
+    </ul>
+  )
 }
