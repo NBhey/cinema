@@ -17,7 +17,7 @@ export const FilmCard = ({ film, index }: { film: Films; index: number }) => {
 
   return (
     <li
-      key={film.id}
+      key={id}
       className={styles['filmCard']}
       ref={ref}
       data-dragging={isDragging}
@@ -31,7 +31,7 @@ export const FilmCard = ({ film, index }: { film: Films; index: number }) => {
       <div
         className={styles['filmDescription']}
         style={{
-          backgroundColor: ColorBG[Math.floor(Math.random() * ColorBG.length)],
+          backgroundColor: ColorBG[index],
         }}
       >
         <p>{film.filmName}</p>

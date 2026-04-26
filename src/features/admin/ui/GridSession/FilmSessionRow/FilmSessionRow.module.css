@@ -1,3 +1,10 @@
+.hallRowList {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
 .hallItem {
   list-style-type: none;
 }
@@ -9,4 +16,38 @@
 
   display: flex;
   position: relative;
+}
+
+.rowCard {
+  position: absolute;
+
+  width: 100%;
+  max-width: 100px;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #0000004d;
+  top: 50%;
+  transform: translate(0, -50%);
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.rowTime {
+  width: 1px;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 5px;
+  color: #848484;
+  border-left: 2px solid #848484;
+}
+
+.rowTime::before {
+  position: absolute;
+  bottom: -15px;
+  color: #848484;
+  content: attr(data-content);
+  transform: translate(-50%);
 }

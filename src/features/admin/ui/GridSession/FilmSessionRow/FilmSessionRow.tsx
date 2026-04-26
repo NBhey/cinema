@@ -2,7 +2,15 @@ import { AllDataFilm } from '@/shared/api/type'
 import styles from './FilmSessionRow.module.css'
 
 const MINUTE_IN_DAY = 1440
-const WIDTH = '100%'
+const WIDTH = 100
+
+function getPositionForFilmSeance(time: string) {
+  const [hour, minute] = time.split(':')
+  console.log(hour, minute)
+  const allMinute = Number(hour) * 60 + Number(minute)
+
+  return (allMinute * WIDTH) / MINUTE_IN_DAY + '%'
+}
 
 export const FilmSessionRow = ({
   data,
@@ -22,7 +30,7 @@ export const FilmSessionRow = ({
   })
 
   return (
-    <ul>
+    <ul className={styles['hallRowList']}>
       {halls.map((hall) => {
         return (
           <li className={styles['hallItem']} key={hall.id}>
@@ -36,8 +44,21 @@ export const FilmSessionRow = ({
                 const filmInfo = { ...seance, ...film }
                 return (
                   <>
-                    <span>{filmInfo.filmName}</span>
-                    <span>{filmInfo.seanceTime}</span>
+                    <p
+                      className={styles['rowCard']}
+                      style={{
+                        left: getPositionForFilmSeance(filmInfo.seanceTime),
+                      }}
+                    >
+                      {filmInfo.filmName}
+                    </p>
+                    <p
+                      className={styles['rowTime']}
+                      data-content={filmInfo.seanceTime}
+                      style={{
+                        left: getPositionForFilmSeance(filmInfo.seanceTime),
+                      }}
+                    />
                   </>
                 )
               })}
