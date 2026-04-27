@@ -7,6 +7,7 @@ import { FilmList } from './FilmList/FilmList'
 import { FilmCreateModal } from './FilmCreateModal/FilmCreateModal'
 import styles from './GridSession.module.css'
 import { FilmSessionRow } from './FilmSessionRow/FilmSessionRow'
+import { DragDropProvider } from '@dnd-kit/react'
 
 export const GridSession = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -26,9 +27,11 @@ export const GridSession = () => {
             text="Добавить фильм"
             clickAction={handleOpenModal}
           />
-          <FilmList films={data?.result.films} />
+          <DragDropProvider>
+            <FilmList films={data?.result.films} />
 
-          <FilmSessionRow data={data} />
+            <FilmSessionRow data={data} />
+          </DragDropProvider>
 
           <FilmCreateModal
             isOpenModal={isOpenModal}

@@ -2,16 +2,15 @@ import { useDeleteFilm } from '@/entities/film/useDeleteFilm'
 import styles from './FilmCard.module.css'
 import bucket from '@/shared/assets/bucket.png'
 import { Films } from '@/shared/api/type'
-import { useSortable } from '@dnd-kit/react/sortable'
+import { useDraggable } from '@dnd-kit/react'
 
 const ColorBG = ['#8599FF', '#85FFD3', '#85FF89', '#CAFF85', '#85E2FF']
 
 export const FilmCard = ({ film, index }: { film: Films; index: number }) => {
   const { id } = film
   const { mutate: deleteFilm } = useDeleteFilm()
-  const { ref, isDragging } = useSortable({
+  const { ref, isDragging } = useDraggable({
     id,
-    index,
     type: 'item',
   })
 
