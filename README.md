@@ -1,46 +1,148 @@
-# Getting Started with Create React App
+# CinemaBook — Приложение для покупки билетов в кино
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Полнофункциональное приложение для бронирования билетов в кинотеатр с пользовательским интерфейсом для покупки и административной панелью для управления фильмами, залами и сеансами.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Возможности
 
-### `npm start`
+### Для пользователя
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Каталог фильмов** — просмотр доступных фильмов с постером, длительностью, страной и описанием
+- **Выбор даты** — навигация по ближайшим дням для просмотра расписания
+- **Сеансы** — сеансы сгруппированы по залам для каждого фильма; прошедшие сеансы автоматически недоступны
+- **Интерактивная схема зала** — выбор стандартных или VIP мест на визуальной схеме; занятые и недоступные места чётко обозначены
+- **Сводка бронирования** — просмотр выбранных мест, информации о фильме, зале, времени и итоговой стоимости перед подтверждением
+- **QR-код билета** — после бронирования генерируется QR-код для предъявления на входе
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Административная панель
 
-### `npm test`
+- **Управление фильмами** — добавление фильмов (название, длительность, описание, страна, постер) и их удаление
+- **Управление залами** — создание и удаление залов по названию
+- **Конфигурация зала** — настройка количества рядов и мест в ряду; переключение отдельных мест между типами Стандарт, VIP и Недоступно с живым превью
+- **Сетка сеансов** — временная шкала всех залов с сеансами, расположенными пропорционально времени суток; заложена основа для drag-and-drop
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Технологии
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Категория | Библиотека / Инструмент |
+|---|---|
+| UI | React 19, TypeScript |
+| Маршрутизация | React Router 7 (HashRouter) |
+| Глобальное состояние | Context API + `useReducer` |
+| Серверное состояние | TanStack React Query 5 |
+| HTTP | Axios (с интерсептором snake_case → camelCase) |
+| Формы | React Hook Form 7 |
+| Drag & Drop | @dnd-kit/react |
+| Headless UI | Radix UI (Dialog) |
+| QR-коды | react-qr-code |
+| Уведомления | React Toastify |
+| Скелетон-лоадеры | react-loading-skeleton |
+| Стили | CSS Modules |
+| Условные классы | clsx |
+| Сборка | CRA + Craco |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Архитектура
 
-### `npm run eject`
+Проект построен по методологии **Feature-Sliced Design (FSD)** — структура делится на строгие вертикальные слои с однонаправленным правилом импортов (верхние слои могут импортировать из нижних, но не наоборот).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+src/
+├── app/          # Глобальные стили, корневые провайдеры
+├── shared/       # Утилиты, HTTP-клиент, глобальное состояние, примитивы UI
+├── entities/     # Хуки бизнес-моделей (CRUD фильмов и залов)
+├── features/     # Пользовательские сценарии: выбор мест, подтверждение, авторизация, панели админа
+├── widgets/      # Составные UI-блоки: шапка/календарь, список фильмов, лейаут бронирования
+└── pages/        # Компоненты уровня маршрута: MainPage, AdministrationPage, Authorization
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Управление состоянием
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Единый React Context (`AppContext`) хранит глобальное состояние — фильмы, залы, сеансы и флаг загрузки. Обновления проходят через `useReducer` с одним действием `UPDATE_ALL_STATE`, которое полностью заменяет срез состояния. Данные загружаются при монтировании и при смене выбранной даты через `getAllData()`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Серверные мутации (добавление/удаление фильмов и залов) используют **TanStack React Query** с автоматической инвалидацией кэша.
 
-## Learn More
+### API-слой
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`src/shared/api/http.ts` — экземпляр Axios с интерсептором ответов, который рекурсивно преобразует все ключи из `snake_case` в `camelCase`, чтобы остальная часть кода работала с единым соглашением об именовании независимо от конвенций бэкенда.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## Быстрый старт
+
+### Требования
+
+- Node.js ≥ 18
+- Запущенный бэкенд с эндпоинтами, перечисленными ниже
+
+### Установка
+
+```bash
+git clone <repo-url>
+cd cinema
+npm install
+```
+
+### Переменные окружения
+
+Скопируйте `.env.example` в `.env` и заполните значения:
+
+```env
+REACT_APP_API_BASE_URL=http://localhost:3001   # базовый URL бэкенда
+REACT_APP_AUTH_LOGIN=admin                      # логин для админ-панели
+REACT_APP_AUTH_PASSWORD=secret                  # пароль для админ-панели
+```
+
+Все три переменные обязательны — приложение выбрасывает явную ошибку при запуске, если хотя бы одна отсутствует.
+
+### Запуск
+
+```bash
+npm start      # сервер для разработки
+npm run build  # продакшн-сборка
+npm test       # тесты
+```
+
+---
+
+## Маршрутизация
+
+Хэш-маршрутизация (`#/...`) позволяет развернуть приложение на статических хостингах (GitHub Pages и др.) без серверной конфигурации.
+
+```
+#/                                         Каталог фильмов (сегодня)
+#/:date                                    Каталог фильмов на выбранную дату
+#/:date/halls/:hallName/seances/:seanceId  Лейаут бронирования
+  └─ /                                     Выбор мест
+  └─ /confirm                              Подтверждение бронирования
+      └─ /:ticket                          QR-код билета
+#/login                                    Вход в админ-панель
+#/admin                                    Административная панель
+```
+
+---
+
+## API-эндпоинты
+
+| Метод | Путь | Описание |
+|---|---|---|
+| `GET` | `/alldata` | Все фильмы, залы и сеансы |
+| `GET` | `/hallconfig` | Схема зала для конкретного сеанса и даты |
+| `POST` | `/ticket` | Бронирование выбранных мест |
+| `POST` | `/login` | Авторизация администратора |
+| `POST` | `/film` | Создание фильма (multipart/form-data) |
+| `DELETE` | `/film/:id` | Удаление фильма |
+| `POST` | `/hall` | Создание зала |
+| `DELETE` | `/hall/:id` | Удаление зала |
+
+---
+
+## Соглашения проекта
+
+- Все импорты из `src/` используют алиас `@/`
+- Модули фич экспортируются через барельный `index.ts`
+- CSS Modules для стилей всех компонентов; `clsx` для условной композиции классов
+- Формат дат `en-CA` (`YYYY-MM-DD`)
