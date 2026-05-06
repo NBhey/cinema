@@ -24,6 +24,10 @@
   animation: contentShow 1500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.content:global([data-state='closed']) {
+  animation: contentHide 300ms ease-in;
+}
+
 .title {
   padding: 16px 42px 14px;
   display: flex;
@@ -68,5 +72,14 @@
   }
   to {
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes contentHide {
+  from {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    transform: translate(-50%, -48%) scale(0);
   }
 }
