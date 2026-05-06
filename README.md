@@ -26,22 +26,22 @@
 
 ## Технологии
 
-| Категория | Библиотека / Инструмент |
-|---|---|
-| UI | React 19, TypeScript |
-| Маршрутизация | React Router 7 (HashRouter) |
-| Глобальное состояние | Context API + `useReducer` |
-| Серверное состояние | TanStack React Query 5 |
-| HTTP | Axios (с интерсептором snake_case → camelCase) |
-| Формы | React Hook Form 7 |
-| Drag & Drop | @dnd-kit/react |
-| Headless UI | Radix UI (Dialog) |
-| QR-коды | react-qr-code |
-| Уведомления | React Toastify |
-| Скелетон-лоадеры | react-loading-skeleton |
-| Стили | CSS Modules |
-| Условные классы | clsx |
-| Сборка | CRA + Craco |
+| Категория            | Библиотека / Инструмент                        |
+| -------------------- | ---------------------------------------------- |
+| UI                   | React 19, TypeScript                           |
+| Маршрутизация        | React Router 7 (HashRouter)                    |
+| Глобальное состояние | Context API + `useReducer`                     |
+| Серверное состояние  | TanStack React Query 5                         |
+| HTTP                 | Axios (с интерсептором snake_case → camelCase) |
+| Формы                | React Hook Form 7                              |
+| Drag & Drop          | @dnd-kit/react                                 |
+| Headless UI          | Radix UI (Dialog)                              |
+| QR-коды              | react-qr-code                                  |
+| Уведомления          | React Toastify                                 |
+| Скелетон-лоадеры     | react-loading-skeleton                         |
+| Стили                | CSS Modules                                    |
+| Условные классы      | clsx                                           |
+| Сборка               | CRA + Craco                                    |
 
 ---
 
@@ -91,9 +91,9 @@ npm install
 Скопируйте `.env.example` в `.env` и заполните значения:
 
 ```env
-REACT_APP_API_BASE_URL=http://localhost:3001   # базовый URL бэкенда
-REACT_APP_AUTH_LOGIN=admin                      # логин для админ-панели
-REACT_APP_AUTH_PASSWORD=secret                  # пароль для админ-панели
+REACT_APP_API_BASE_URL=https://shfe-diplom.neto-server.ru/ # базовый URL бэкенда
+REACT_APP_AUTH_LOGIN=shfe-diplom@netology.ru               # логин для админ-панели
+REACT_APP_AUTH_PASSWORD=shfe-diplom                        # пароль для админ-панели
 ```
 
 Все три переменные обязательны — приложение выбрасывает явную ошибку при запуске, если хотя бы одна отсутствует.
@@ -127,16 +127,16 @@ npm test       # тесты
 
 ## API-эндпоинты
 
-| Метод | Путь | Описание |
-|---|---|---|
-| `GET` | `/alldata` | Все фильмы, залы и сеансы |
-| `GET` | `/hallconfig` | Схема зала для конкретного сеанса и даты |
-| `POST` | `/ticket` | Бронирование выбранных мест |
-| `POST` | `/login` | Авторизация администратора |
-| `POST` | `/film` | Создание фильма (multipart/form-data) |
-| `DELETE` | `/film/:id` | Удаление фильма |
-| `POST` | `/hall` | Создание зала |
-| `DELETE` | `/hall/:id` | Удаление зала |
+| Метод    | Путь          | Описание                                 |
+| -------- | ------------- | ---------------------------------------- |
+| `GET`    | `/alldata`    | Все фильмы, залы и сеансы                |
+| `GET`    | `/hallconfig` | Схема зала для конкретного сеанса и даты |
+| `POST`   | `/ticket`     | Бронирование выбранных мест              |
+| `POST`   | `/login`      | Авторизация администратора               |
+| `POST`   | `/film`       | Создание фильма (multipart/form-data)    |
+| `DELETE` | `/film/:id`   | Удаление фильма                          |
+| `POST`   | `/hall`       | Создание зала                            |
+| `DELETE` | `/hall/:id`   | Удаление зала                            |
 
 ---
 
