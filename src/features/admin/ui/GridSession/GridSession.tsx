@@ -2,7 +2,7 @@ import { PanelBodyWrapper } from '@/shared/ui'
 import useAdminPanelHeader from '../../lib/useAdminPanelHeader'
 import { Button } from '@/shared/ui/Button/Button'
 import { useHallsQuery } from '@/shared/api/hall/quieries'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { FilmList } from './FilmList/FilmList'
 import { FilmCreateModal } from './FilmCreateModal/FilmCreateModal'
 import styles from './GridSession.module.css'
@@ -15,6 +15,7 @@ export const GridSession = () => {
   const [isSeanceFilmOpenModal, setIsSeanceFilmOpenModal] = useState(false)
   const { isPanelOpen, Header } = useAdminPanelHeader('Сетка сеансов')
   const { data } = useHallsQuery()
+  const filmId = useRef<number | string | null>(null)
 
   const handleOpenModal = () => setIsOpenModal(true)
   const handleCloseModal = () => setIsOpenModal(false)
@@ -35,6 +36,7 @@ export const GridSession = () => {
 
               if (source && target) {
                 setIsSeanceFilmOpenModal(true)
+                filmId.current = source?.id
               }
             }}
           >
@@ -53,6 +55,7 @@ export const GridSession = () => {
               setIsSeanceFilmOpenModal(false)
             }}
             films={data?.result.films}
+            selectedFilmId={filmId.current}
           />
         </PanelBodyWrapper>
       )}
