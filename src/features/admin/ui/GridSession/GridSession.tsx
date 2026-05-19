@@ -8,15 +8,17 @@ import { FilmCreateModal } from './FilmCreateModal/FilmCreateModal'
 import styles from './GridSession.module.css'
 import { FilmSessionRow } from './FilmSessionRow/FilmSessionRow'
 import { DragDropProvider } from '@dnd-kit/react'
+import { SeanceAddModal } from './SeanceAddModal/SeanceAddModal'
 
 export const GridSession = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
-
+  const [isSeanceFilmOpenModal, setIsSeanceFilmOpenModal] = useState(false)
   const { isPanelOpen, Header } = useAdminPanelHeader('Сетка сеансов')
   const { data } = useHallsQuery()
 
   const handleOpenModal = () => setIsOpenModal(true)
   const handleCloseModal = () => setIsOpenModal(false)
+
   return (
     <>
       <Header />
@@ -27,7 +29,15 @@ export const GridSession = () => {
             text="Добавить фильм"
             clickAction={handleOpenModal}
           />
-          <DragDropProvider>
+          <DragDropProvider
+            onDragEnd={({ operation }) => {
+              const { source, target } = operation
+
+              if (source && target) {
+                setIsSeanceFilmOpenModal(true)
+              }
+            }}
+          >
             <FilmList films={data?.result.films} />
 
             <FilmSessionRow data={data} />
@@ -36,6 +46,13 @@ export const GridSession = () => {
           <FilmCreateModal
             isOpenModal={isOpenModal}
             onClose={handleCloseModal}
+          />
+          <SeanceAddModal
+            isOpen={isSeanceFilmOpenModal}
+            onClose={() => {
+              setIsSeanceFilmOpenModal(false)
+            }}
+            films={data?.result.films}
           />
         </PanelBodyWrapper>
       )}
