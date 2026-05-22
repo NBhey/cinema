@@ -1,0 +1,16 @@
+.inputField {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #b7b7b7;
+}
+
+.inputField:not(:last-child) {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6"><path d="M0 0l6 6 6-6z" fill="%23333"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.7em top 50%;
+  background-size: 0.65em auto;
+}

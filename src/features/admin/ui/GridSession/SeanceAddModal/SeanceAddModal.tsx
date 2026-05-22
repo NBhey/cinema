@@ -1,5 +1,7 @@
 import { Films, Hall } from '@/shared/api/type'
 import { Modal } from '@/shared/ui/Modal/Modal'
+import styles from './SeanceAddModal.module.css'
+import { Button } from '@/shared/ui/Button/Button'
 
 export const SeanceAddModal = ({
   isOpen,
@@ -16,13 +18,12 @@ export const SeanceAddModal = ({
   selectedFilmId: string | number | null
   selectedHallId: string | number | null
 }) => {
-  console.log('SeanceAddModal', halls)
   return (
     <Modal isOpen={isOpen} isModal title="Добавление сеанса" onClose={onClose}>
       <>
         <label>
           <p>Название зала</p>
-          <select name="hall" id="">
+          <select name="hall" id="hall" className={styles['inputField']}>
             {halls?.map((hall) => {
               let hallId: string =
                 typeof selectedHallId === 'string'
@@ -40,10 +41,14 @@ export const SeanceAddModal = ({
 
         <label>
           <p>Название фильма</p>
-          <select name="" id="">
+          <select name="film" id="film" className={styles['inputField']}>
             {films?.map((film) => {
               return (
-                <option key={film.id} selected={selectedFilmId === film.id}>
+                <option
+                  key={film.id}
+                  value={film.id}
+                  selected={selectedFilmId === film.id}
+                >
                   {film.filmName}
                 </option>
               )
@@ -51,10 +56,36 @@ export const SeanceAddModal = ({
           </select>
         </label>
 
-        <label htmlFor="">
+        <label htmlFor="time">
           <p>Время начала</p>
-          <input type="time" name="" id="" value="00:00" />
+          <input
+            type="time"
+            name="time"
+            id="time"
+            value="00:00"
+            className={styles['inputField']}
+          />
         </label>
+
+        <Button
+          text="Добавить фильм"
+          variant="standart"
+          clickAction={() => {
+            const film = document.querySelector<HTMLSelectElement>('#film')
+            const hall = document.querySelector<HTMLSelectElement>('#hall')
+            const time = document.querySelector<HTMLInputElement>('#time')
+
+            console.log(film?.value, hall?.value, time?.value)
+          }}
+        ></Button>
+
+        <Button
+          clickAction={() => {
+            onClose()
+          }}
+          text="Отменить"
+          variant="standart"
+        ></Button>
       </>
     </Modal>
   )
