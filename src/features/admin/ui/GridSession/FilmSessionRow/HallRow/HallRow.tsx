@@ -1,4 +1,4 @@
-import { AllDataFilm, Hall } from '@/shared/api/type'
+import { AllDataFilm } from '@/shared/api/type'
 import styles from './HallRow.module.css'
 import { HallWithSeances } from '../FilmSessionRow'
 import { useDroppable } from '@dnd-kit/react'
@@ -21,7 +21,7 @@ export const HallRow = ({
   hall: HallWithSeances
   films: AllDataFilm['films']
 }) => {
-  const { isDropTarget, ref } = useDroppable({
+  const { ref } = useDroppable({
     id: `hall-${hall.id}`,
   })
 
