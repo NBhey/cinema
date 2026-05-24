@@ -2,6 +2,7 @@ import { AllDataFilm, Hall } from '@/shared/api/type'
 import styles from './HallRow.module.css'
 import { HallWithSeances } from '../FilmSessionRow'
 import { useDroppable } from '@dnd-kit/react'
+import { Fragment } from 'react'
 
 const MINUTE_IN_DAY = 1440
 const WIDTH = 100
@@ -28,11 +29,11 @@ export const HallRow = ({
     <li className={styles['hallItem']} key={hall.id} ref={ref}>
       <p>{hall.hallName}</p>
       <div className={styles['row']}>
-        {hall.seance.map((seance) => {
+        {hall.seance.map((seance, index) => {
           const film = films.find((film) => seance.seanceFilmid === film?.id)
           const filmInfo = { ...seance, ...film }
           return (
-            <>
+            <Fragment key={`${filmInfo.id}-${index}`}>
               <p
                 className={styles['rowCard']}
                 style={{
@@ -48,7 +49,7 @@ export const HallRow = ({
                   left: getPositionForFilmSeance(filmInfo.seanceTime),
                 }}
               />
-            </>
+            </Fragment>
           )
         })}
       </div>

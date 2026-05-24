@@ -16,6 +16,7 @@ export const GridSession = () => {
   const { isPanelOpen, Header } = useAdminPanelHeader('Сетка сеансов')
   const { data } = useHallsQuery()
   const filmId = useRef<number | string | null>(null)
+  const hallId = useRef<number | string | null>(null)
 
   const handleOpenModal = () => setIsOpenModal(true)
   const handleCloseModal = () => setIsOpenModal(false)
@@ -36,7 +37,8 @@ export const GridSession = () => {
 
               if (source && target) {
                 setIsSeanceFilmOpenModal(true)
-                filmId.current = source?.id
+                filmId.current = source.id
+                hallId.current = target.id
               }
             }}
           >
@@ -55,7 +57,9 @@ export const GridSession = () => {
               setIsSeanceFilmOpenModal(false)
             }}
             films={data?.result.films}
+            halls={data?.result.halls}
             selectedFilmId={filmId.current}
+            selectedHallId={hallId.current}
           />
         </PanelBodyWrapper>
       )}
